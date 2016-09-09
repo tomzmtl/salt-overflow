@@ -1,9 +1,9 @@
 /* Database */
-const { LOCAL_CONNECTION_STRING } = require('../constants/database');
 const DataTypes = require('sequelize');
 
-const CONNECTION_STRING = process.env.NODE_ENV === 'dev' ?
-        LOCAL_CONNECTION_STRING : process.env.DATABASE_URL;
+
+const { PASSWORD, USERNAME, PORT, DATABASE, HOST } = process.env;
+const CONNECTION_STRING = `postgres://${USERNAME}:${PASSWORD}@${HOST}:${PORT}/${DATABASE}`;
 const sequelize = new DataTypes(CONNECTION_STRING);
 
 /* Utils */
