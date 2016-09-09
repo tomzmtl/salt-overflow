@@ -2,8 +2,8 @@
 const DataTypes = require('sequelize');
 
 
-const { PASSWORD, USERNAME, PORT, DATABASE, HOST } = process.env;
-const CONNECTION_STRING = `postgres://${USERNAME}:${PASSWORD}@${HOST}:${PORT}/${DATABASE}`;
+const { DB_PASS, DB_USER, DB_PORT, DB_NAME, DB_HOST } = process.env;
+const CONNECTION_STRING = `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
 const sequelize = new DataTypes(CONNECTION_STRING);
 
 /* Utils */
