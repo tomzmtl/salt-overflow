@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "SaltOverflow Backend REST API",
   "main": "server.js",
+  "repository": "https://github.com/tomzmtl/SaltOverflow",
+  "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=prod node --harmony --harmony_destructuring --use_strict server.js",
     "dev": "DEBUG=*,-express:*,-nodemon* NODE_ENV=dev nodemon --harmony --use_strict server.js",
-    "watch": "gulp"
+    "watch": "gulp",
+    "lint": "eslint app/**/*.js || true"
   },
   "author": "Justin D'Errico <justinderrico1991@gmail.com>, Thomas Andreo <thomas.andreo@gmail.com>",
   "dependencies": {
@@ -16,22 +19,17 @@
     "debug": "^2.2.0",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
-    "gulp-eslint": "^2.0.0",
     "lodash": "^4.13.1",
     "nodemailer": "^2.4.2",
     "pg": "^6.0.1",
     "sequelize": "^3.23.4"
   },
   "devDependencies": {
-    "eslint": "^2.13.0",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.14.0",
-    "eslint-plugin-jsx-a11y": "^2.2.1",
-    "eslint-plugin-react": "^6.2.0",
-    "globby": "^5.0.0",
-    "gulp": "^3.9.1",
-    "gulp-util": "^3.0.7",
-    "gulp-watch": "^4.3.8",
+    "eslint": "^3.5.0",
+    "eslint-config-airbnb": "^11.1.0",
+    "eslint-plugin-import": "^1.15.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.2.2",
     "nodemon": "^1.9.2"
   }
 }
