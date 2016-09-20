@@ -1,7 +1,7 @@
 /* Utils */
 const debug = require('debug')('Players table');
 
-module.exports = function (sequelize, DataTypes) { // eslint-disable-line func-names
+module.exports = (sequelize, DataTypes) => {
   const Players = sequelize.define('player', {
     firstname: {
       type: DataTypes.STRING,

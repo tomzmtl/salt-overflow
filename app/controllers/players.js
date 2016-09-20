@@ -1,6 +1,10 @@
-const db = require('../models');
+import db from '../models/index';
 
-exports.findAll = (req, res) => {
+
+export default null;
+
+
+export const findAll = (req, res) => {
   db.Players.findAll()
     .then((result) => {
       if (!result.length) {
@@ -13,7 +17,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.add = (req, res) => {
+export const add = (req, res) => {
   const newPlayer = req.body;
 
   db.Players.build(newPlayer).save()
@@ -25,7 +29,7 @@ exports.add = (req, res) => {
     });
 };
 
-exports.findById = (req, res) => {
+export const findById = (req, res) => {
   const { id } = req.params;
 
   db.Players.findById(id)
@@ -42,7 +46,7 @@ exports.findById = (req, res) => {
 };
 
 
-exports.update = (req, res) => {
+export const update = (req, res) => {
   const { id } = req.params;
   const updates = req.body;
 
@@ -64,7 +68,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+export const deletePlayer = (req, res) => {
   const { id } = req.params;
   db.Players.findById(id)
     .then((result) => {

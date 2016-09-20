@@ -1,8 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-
-require('dotenv').config();
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import routes from './routes';
 
 const app = express();
 
@@ -36,4 +35,4 @@ app.use((req, res, next) => {
 app.use('/', express.static(`${__dirname}/public`));
 
 /* ROUTES */
-require('./routes')(app);
+routes(app);
