@@ -1,7 +1,7 @@
 {
   "name": "SaltOverflow",
   "version": "1.0.0",
-  "description": "SaltOverflow Backend REST API",
+  "description": "Get Saltier!",
   "main": "server.js",
   "repository": "https://github.com/tomzmtl/SaltOverflow",
   "license": "MIT",
