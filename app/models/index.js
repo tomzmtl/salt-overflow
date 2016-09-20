@@ -3,9 +3,11 @@ import DataTypes from 'sequelize';
 import { forOwn } from 'lodash';
 import dotEnv from 'dotenv';
 
-const { DB_PASS, DB_USER, DB_PORT, DB_NAME, DB_HOST } = dotEnv.config();
+
+const config = process.env.NODE_ENV === 'dev' ? dotEnv.config() : process.env;
+
+const { DB_PASS, DB_USER, DB_PORT, DB_NAME, DB_HOST } = config;
 const CONNECTION_STRING = `postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}`;
-console.log(CONNECTION_STRING);
 const sequelize = new DataTypes(CONNECTION_STRING);
 
 // Database context
