@@ -1,6 +1,5 @@
 /* Database */
 import DataTypes from 'sequelize';
-import { forOwn } from 'lodash';
 import dotEnv from 'dotenv';
 
 
@@ -14,12 +13,10 @@ const sequelize = new DataTypes(CONNECTION_STRING);
 const db = {};
 
 /* Models */
-db.MODELS = {
-  PLAYERS: 'Players',
-};
+const models = ['Players'];
 
 // Import every models
-forOwn(db.MODELS, (value) => {
+models.forEach((value) => {
   db[value] = sequelize.import(`./${value}.js`);
 });
 
