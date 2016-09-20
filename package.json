@@ -6,9 +6,8 @@
   "repository": "https://github.com/tomzmtl/SaltOverflow",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=prod babel-node --harmony server.js",
+    "start": "NODE_ENV=prod ./node_modules/.bin/babel-node --harmony server.js",
     "dev": "nodemon server.js --exec babel-node",
-    "watch": "gulp",
     "lint": "eslint app/**/*.js || true"
   },
   "author": "Justin D'Errico <justinderrico1991@gmail.com>, Thomas Andreo <thomas.andreo@gmail.com>",
