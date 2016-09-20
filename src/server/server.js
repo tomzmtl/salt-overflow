@@ -32,7 +32,11 @@ app.use((req, res, next) => {
 /* ------------------------------------------------------------------------------------------ */
 
 // Website route
-app.use('/', express.static(`${__dirname}/public`));
+app.use('/', express.static('public'));
+
+app.use('/public', express.static('public'));
+
+console.log(__dirname);
 
 /* ROUTES */
 routes(app);

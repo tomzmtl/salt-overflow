@@ -6,9 +6,10 @@
   "repository": "https://github.com/tomzmtl/SaltOverflow",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=prod ./node_modules/.bin/babel-node --harmony server.js",
-    "dev": "NODE_ENV=dev nodemon server.js --exec babel-node",
-    "lint": "eslint app/**/*.js || true"
+    "start": "NODE_ENV=prod ./node_modules/.bin/babel-node --harmony ./src/server/server.js",
+    "dev": "NODE_ENV=dev nodemon ./src/server/server.js --exec babel-node",
+    "lint": "eslint app/**/*.js || true",
+    "webpack": "webpack --watch"
   },
   "author": "Justin D'Errico <justinderrico1991@gmail.com>, Thomas Andreo <thomas.andreo@gmail.com>",
   "dependencies": {
@@ -22,16 +23,22 @@
     "debug": "^2.2.0",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "nodemailer": "^2.4.2",
     "pg": "^6.0.1",
     "sequelize": "^3.23.4"
   },
   "devDependencies": {
+    "babel-loader": "^6.2.5",
+    "css-loader": "^0.25.0",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^11.1.0",
     "eslint-plugin-import": "^1.15.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.2.2",
-    "nodemon": "^1.9.2"
+    "node-sass": "^3.10.0",
+    "nodemon": "^1.9.2",
+    "sass-loader": "^4.0.2",
+    "webpack": "^1.13.2"
   }
 }

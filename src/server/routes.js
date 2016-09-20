@@ -1,4 +1,4 @@
-import * as players from './app/controllers/players';
+import * as players from './controllers/players';
 
 
 export default (app) => {
