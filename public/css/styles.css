@@ -397,7 +397,8 @@ body {
   .block {
     display: flex; }
     .block > header {
-      width: 30%; }
+      width: 30%;
+      max-width: 150px; }
     .block > .content {
       width: 70%; } }
 
