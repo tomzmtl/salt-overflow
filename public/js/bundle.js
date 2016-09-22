@@ -21488,43 +21488,35 @@
 	var results = [{
 	  players: ['Petate', 'ATo'],
 	  score: [2, 1],
-	  characters: ['cld', 'cor'],
-	  winner: 0
+	  characters: ['cld', 'cor']
 	}, {
 	  players: ['RY', 'ATo'],
 	  score: [0, 2],
-	  characters: ['zss', 'cor'],
-	  winner: 1
+	  characters: ['zss', 'cor']
 	}, {
 	  players: ['Neocid', 'Petate'],
 	  score: [2, 1],
-	  characters: ['bow', 'lui'],
-	  winner: 0
+	  characters: ['bow', 'lui']
 	}, {
 	  players: ['NAT', 'ATo'],
 	  score: [1, 2],
-	  characters: ['bay', 'cor'],
-	  winner: 1
+	  characters: ['bay', 'cor']
 	}, {
 	  players: ['Petate', 'NAT'],
 	  score: [1, 2],
-	  characters: ['shu', 'bay'],
-	  winner: 1
+	  characters: ['shu', 'bay']
 	}, {
 	  players: ['RY', 'ATo'],
 	  score: [2, 1],
-	  characters: ['mar', 'cor'],
-	  winner: 0
+	  characters: ['mar', 'cor']
 	}, {
 	  players: ['Neocid', 'ATo'],
 	  score: [2, 1],
-	  characters: ['bow', 'cor'],
-	  winner: 0
+	  characters: ['bow', 'cor']
 	}, {
 	  players: ['NAT', 'Neocid'],
 	  score: [1, 2],
-	  characters: ['bay', 'bow'],
-	  winner: 1
+	  characters: ['bay', 'bow']
 	}];
 	
 	exports.default = function () {
@@ -21621,7 +21613,7 @@
 	
 	var renderResults = function renderResults(results) {
 	  return results.map(function (result, i) {
-	    return _react2.default.createElement(_ResultRow2.default, _extends({}, result, { key: i }));
+	    return _react2.default.createElement(_ResultRow2.default, _extends({}, result, { winner: result.score[0] > result.score[1] ? 0 : 1, key: i }));
 	  });
 	};
 	

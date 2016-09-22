@@ -3,7 +3,7 @@ import ResultRow from './ResultRow';
 
 
 const renderResults = results => results.map((result, i) => (
-  <ResultRow {...result} key={i} />
+  <ResultRow {...result} winner={result.score[0] > result.score[1] ? 0 : 1} key={i} />
 ));
 
 

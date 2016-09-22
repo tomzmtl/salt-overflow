@@ -36,49 +36,41 @@ const results = [
     players: ['Petate', 'ATo'],
     score: [2, 1],
     characters: ['cld', 'cor'],
-    winner: 0,
   },
   {
     players: ['RY', 'ATo'],
     score: [0, 2],
     characters: ['zss', 'cor'],
-    winner: 1,
   },
   {
     players: ['Neocid', 'Petate'],
     score: [2, 1],
     characters: ['bow', 'lui'],
-    winner: 0,
   },
   {
     players: ['NAT', 'ATo'],
     score: [1, 2],
     characters: ['bay', 'cor'],
-    winner: 1,
   },
   {
     players: ['Petate', 'NAT'],
     score: [1, 2],
     characters: ['shu', 'bay'],
-    winner: 1,
   },
   {
     players: ['RY', 'ATo'],
     score: [2, 1],
     characters: ['mar', 'cor'],
-    winner: 0,
   },
   {
     players: ['Neocid', 'ATo'],
     score: [2, 1],
     characters: ['bow', 'cor'],
-    winner: 0,
   },
   {
     players: ['NAT', 'Neocid'],
     score: [1, 2],
     characters: ['bay', 'bow'],
-    winner: 1,
   },
 ];
 
