@@ -3,12 +3,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import App from './components/App';
+
 import '../scss/app.scss';
 
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <div>Hola amigo!</div>,
+    <App />,
     document.getElementById('root')
   );
 });

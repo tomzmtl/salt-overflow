@@ -1,0 +1,49 @@
+.main-header {
+  padding: 20px 20px 14px 20px;
+  border-bottom: 3px solid $theme_primary;
+  background: white;
+
+  h1 {
+    margin: 0;
+    font-weight: normal;
+    font-size: 1em;
+    color: #666;
+
+    span {
+      margin-right: 1px;
+      font-weight: 600;
+      color: $theme_primary;
+    }
+  }
+}
+
+.block {
+  padding: 30px 20px;
+  background: white;
+  border-bottom: 1px solid rgba($theme_primary, 0.3);
+
+  > header {
+    margin-bottom: 20px;
+    
+    h1 {
+      margin: 0;
+      font-size: 1.1em;
+      font-weight: 400;
+    }
+  }
+}
+
+
+@media (min-width: 520px) {
+  .block {
+    display: flex;
+
+    > header {
+      width: 30%;
+    }
+
+    > .content {
+      width: 70%;
+    }
+  }
+}

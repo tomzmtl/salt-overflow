@@ -1,4 +1,13 @@
+@import 'normalize';
+
 body {
-  background: #F7F7F7;
-  font-family: 'Helvetica', sans-serif;
+  background: #FCFCFC;
+  font-family: 'Poppins', sans-serif;
 }
+
+$theme_primary: #f59214;
+
+@import 'layout';
+
+@import 'components/SaltyMeter';
+@import 'components/LatestResults';

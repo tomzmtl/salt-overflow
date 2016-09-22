@@ -61,17 +61,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	__webpack_require__(173);
+	var _App = __webpack_require__(173);
+	
+	var _App2 = _interopRequireDefault(_App);
+	
+	__webpack_require__(177);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	/* eslint-disable react/jsx-filename-extension */
+	
 	document.addEventListener('DOMContentLoaded', function () {
-	  _reactDom2.default.render(_react2.default.createElement(
-	    'div',
-	    null,
-	    'Hola amigo!'
-	  ), document.getElementById('root'));
-	}); /* eslint-disable react/jsx-filename-extension */
+	  _reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('root'));
+	});
 
 /***/ },
 /* 2 */
@@ -21441,6 +21443,281 @@
 
 /***/ },
 /* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _SaltyMeter = __webpack_require__(174);
+	
+	var _SaltyMeter2 = _interopRequireDefault(_SaltyMeter);
+	
+	var _LatestResults = __webpack_require__(175);
+	
+	var _LatestResults2 = _interopRequireDefault(_LatestResults);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var salt = [{
+	  name: 'Petate',
+	  score: 75
+	}, {
+	  name: 'RY',
+	  score: 37
+	}, {
+	  name: 'ATo',
+	  score: 32
+	}, {
+	  name: 'Neocid',
+	  score: 23
+	}, {
+	  name: 'NAT',
+	  score: 22
+	}, {
+	  name: 'Sendo',
+	  score: 11
+	}];
+	
+	var results = [{
+	  players: ['Petate', 'ATo'],
+	  score: [2, 1],
+	  characters: ['cld', 'cor'],
+	  winner: 0
+	}, {
+	  players: ['RY', 'ATo'],
+	  score: [0, 2],
+	  characters: ['zss', 'cor'],
+	  winner: 1
+	}, {
+	  players: ['Neocid', 'Petate'],
+	  score: [2, 1],
+	  characters: ['bow', 'lui'],
+	  winner: 0
+	}, {
+	  players: ['NAT', 'ATo'],
+	  score: [1, 2],
+	  characters: ['bay', 'cor'],
+	  winner: 1
+	}, {
+	  players: ['Petate', 'NAT'],
+	  score: [1, 2],
+	  characters: ['shu', 'bay'],
+	  winner: 1
+	}, {
+	  players: ['RY', 'ATo'],
+	  score: [2, 1],
+	  characters: ['mar', 'cor'],
+	  winner: 0
+	}, {
+	  players: ['Neocid', 'ATo'],
+	  score: [2, 1],
+	  characters: ['bow', 'cor'],
+	  winner: 0
+	}, {
+	  players: ['NAT', 'Neocid'],
+	  score: [1, 2],
+	  characters: ['bay', 'bow'],
+	  winner: 1
+	}];
+	
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'app-content' },
+	    _react2.default.createElement(_SaltyMeter2.default, { data: salt }),
+	    _react2.default.createElement(_LatestResults2.default, { results: results })
+	  );
+	};
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var renderRow = function renderRow(player, index) {
+	  return _react2.default.createElement(
+	    "li",
+	    { key: index },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "name" },
+	      player.name
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "score" },
+	      player.score
+	    )
+	  );
+	};
+	
+	exports.default = function (_ref) {
+	  var data = _ref.data;
+	  return _react2.default.createElement(
+	    "section",
+	    { className: "component__SaltyMeter block" },
+	    _react2.default.createElement(
+	      "header",
+	      null,
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        "Salt-y-Meter"
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "content" },
+	      _react2.default.createElement(
+	        "ul",
+	        null,
+	        data.map(function (player) {
+	          return renderRow(player);
+	        })
+	      )
+	    )
+	  );
+	};
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _ResultRow = __webpack_require__(176);
+	
+	var _ResultRow2 = _interopRequireDefault(_ResultRow);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var renderResults = function renderResults(results) {
+	  return results.map(function (result, i) {
+	    return _react2.default.createElement(_ResultRow2.default, _extends({}, result, { key: i }));
+	  });
+	};
+	
+	var LatestResults = function LatestResults(props) {
+	  return _react2.default.createElement(
+	    'section',
+	    { className: 'block component__LatestResults' },
+	    _react2.default.createElement(
+	      'header',
+	      null,
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        'Latest Results'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'content' },
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        renderResults(props.results)
+	      )
+	    )
+	  );
+	};
+	
+	LatestResults.propTypes = {
+	  results: _react.PropTypes.array.isRequired
+	};
+	
+	exports.default = LatestResults;
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ResultRow = function ResultRow(_ref) {
+	  var players = _ref.players;
+	  var score = _ref.score;
+	  var characters = _ref.characters;
+	  var winner = _ref.winner;
+	
+	  var p = players.map(function (name, index) {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'player p' + (index + 1) + ' ' + (index === winner ? 'winner' : 'loser') },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'name' },
+	        name
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'icon' },
+	        _react2.default.createElement('img', { src: 'public/images/characters/small/' + characters[index] + '.png' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'score' },
+	        score[index]
+	      )
+	    );
+	  });
+	
+	  return _react2.default.createElement(
+	    'li',
+	    null,
+	    p
+	  );
+	};
+	
+	ResultRow.propTypes = {
+	  players: _react.PropTypes.array.isRequired,
+	  characters: _react.PropTypes.array.isRequired,
+	  score: _react.PropTypes.array.isRequired,
+	  winner: _react.PropTypes.number.isRequired
+	};
+	
+	exports.default = ResultRow;
+
+/***/ },
+/* 177 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

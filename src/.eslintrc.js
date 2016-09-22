@@ -6,4 +6,7 @@ module.exports = {
   env: {
     browser: true,
   },
+  rules: {
+    'jsx-a11y/img-has-alt': 'off',
+  },
 };
