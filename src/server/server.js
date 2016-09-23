@@ -36,7 +36,5 @@ app.use('/', express.static('public'));
 
 app.use('/public', express.static('public'));
 
-console.log(__dirname);
-
 /* ROUTES */
 routes(app);
