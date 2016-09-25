@@ -21,28 +21,18 @@ SaltOverflow backend API.
                 "sessions_played": 5,
             }
         ]
+            
+## Games Collection [/games]
 
-### Create a New Player [POST]
+### List All Games [GET]
 
-+ Request (application/json)
++ Response 200 (application/json)
 
-        {
-            "name": "Gougoune",
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /players/2
-
-    + Body
-
+        [
             {
-                "name": "Gougoune",
-                "played_characters": [],
-                "salt": 0,
-                "win_percent": 0,
-                "games_played": 0,
-                "sessions_played": 0,
+                "players": [2, 4],
+                "characters": [19, 31],
+                "score": [1, 2],
+                "session": 3,
             }
+        ]
