@@ -1,0 +1,48 @@
+FORMAT: 1A
+HOST: http://saltoverflow.apiblueprint.org/
+
+# SaltOverflow
+
+SaltOverflow backend API.
+
+## Players Collection [/players]
+
+### List All Players [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "RY",
+                "played_characters": [54, 19, 31],
+                "salt": 76,
+                "win_percent": 47,
+                "games_played": 21,
+                "sessions_played": 5,
+            }
+        ]
+
+### Create a New Player [POST]
+
++ Request (application/json)
+
+        {
+            "name": "Gougoune",
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /players/2
+
+    + Body
+
+            {
+                "name": "Gougoune",
+                "played_characters": [],
+                "salt": 0,
+                "win_percent": 0,
+                "games_played": 0,
+                "sessions_played": 0,
+            }
