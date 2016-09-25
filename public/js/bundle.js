@@ -61,17 +61,17 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _es6Promise = __webpack_require__(178);
+	var _es6Promise = __webpack_require__(173);
 	
 	var _es6Promise2 = _interopRequireDefault(_es6Promise);
 	
-	__webpack_require__(180);
+	__webpack_require__(175);
 	
-	var _App = __webpack_require__(173);
+	var _App = __webpack_require__(177);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	__webpack_require__(177);
+	__webpack_require__(181);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -80,10 +80,10 @@
 	_es6Promise2.default.polyfill();
 	
 	document.addEventListener('DOMContentLoaded', function () {
-	  fetch('/api/all').then(function (response) {
+	  fetch('/api/v1/players').then(function (response) {
 	    return response.json();
 	  }).then(function (data) {
-	    _reactDom2.default.render(_react2.default.createElement(_App2.default, data), document.getElementById('root'));
+	    _reactDom2.default.render(_react2.default.createElement(_App2.default, { players: data, results: [] }), document.getElementById('root'));
 	  });
 	});
 
@@ -21457,227 +21457,6 @@
 /* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _SaltyMeter = __webpack_require__(174);
-	
-	var _SaltyMeter2 = _interopRequireDefault(_SaltyMeter);
-	
-	var _LatestResults = __webpack_require__(175);
-	
-	var _LatestResults2 = _interopRequireDefault(_LatestResults);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function (_ref) {
-	  var players = _ref.players;
-	  var results = _ref.results;
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'app-content' },
-	    _react2.default.createElement(_SaltyMeter2.default, { players: players }),
-	    _react2.default.createElement(_LatestResults2.default, { results: results })
-	  );
-	};
-
-/***/ },
-/* 174 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var renderRow = function renderRow(player, index) {
-	  return _react2.default.createElement(
-	    "li",
-	    { key: index },
-	    _react2.default.createElement(
-	      "div",
-	      { className: "name" },
-	      player.name
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "score" },
-	      player.salt
-	    )
-	  );
-	};
-	
-	exports.default = function (_ref) {
-	  var players = _ref.players;
-	  return _react2.default.createElement(
-	    "section",
-	    { className: "component__SaltyMeter block" },
-	    _react2.default.createElement(
-	      "header",
-	      null,
-	      _react2.default.createElement(
-	        "h1",
-	        null,
-	        "Salt-y-Meter"
-	      )
-	    ),
-	    _react2.default.createElement(
-	      "div",
-	      { className: "content" },
-	      _react2.default.createElement(
-	        "ul",
-	        null,
-	        players.map(function (player, i) {
-	          return renderRow(player, i);
-	        })
-	      )
-	    )
-	  );
-	};
-
-/***/ },
-/* 175 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _ResultRow = __webpack_require__(176);
-	
-	var _ResultRow2 = _interopRequireDefault(_ResultRow);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var renderResults = function renderResults(results) {
-	  return results.map(function (result, i) {
-	    return _react2.default.createElement(_ResultRow2.default, _extends({}, result, { winner: result.score[0] > result.score[1] ? 0 : 1, key: i }));
-	  });
-	};
-	
-	var LatestResults = function LatestResults(props) {
-	  return _react2.default.createElement(
-	    'section',
-	    { className: 'block component__LatestResults' },
-	    _react2.default.createElement(
-	      'header',
-	      null,
-	      _react2.default.createElement(
-	        'h1',
-	        null,
-	        'Latest Results'
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'content' },
-	      _react2.default.createElement(
-	        'ul',
-	        null,
-	        renderResults(props.results)
-	      )
-	    )
-	  );
-	};
-	
-	LatestResults.propTypes = {
-	  results: _react.PropTypes.array.isRequired
-	};
-	
-	exports.default = LatestResults;
-
-/***/ },
-/* 176 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var ResultRow = function ResultRow(_ref) {
-	  var players = _ref.players;
-	  var score = _ref.score;
-	  var characters = _ref.characters;
-	  var winner = _ref.winner;
-	
-	  var p = players.map(function (name, index) {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'player p' + (index + 1) + ' ' + (index === winner ? 'winner' : 'loser'), key: index },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'name' },
-	        name
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'icon' },
-	        _react2.default.createElement('img', { src: 'public/images/characters/small/' + characters[index] + '.png' })
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'score' },
-	        score[index]
-	      )
-	    );
-	  });
-	
-	  return _react2.default.createElement(
-	    'li',
-	    null,
-	    p
-	  );
-	};
-	
-	ResultRow.propTypes = {
-	  players: _react.PropTypes.array.isRequired,
-	  characters: _react.PropTypes.array.isRequired,
-	  score: _react.PropTypes.array.isRequired,
-	  winner: _react.PropTypes.number.isRequired
-	};
-	
-	exports.default = ResultRow;
-
-/***/ },
-/* 177 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 178 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var require;/* WEBPACK VAR INJECTION */(function(process, global) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
@@ -21810,7 +21589,7 @@
 	function attemptVertx() {
 	  try {
 	    var r = require;
-	    var vertx = __webpack_require__(179);
+	    var vertx = __webpack_require__(174);
 	    vertxNext = vertx.runOnLoop || vertx.runOnContext;
 	    return useVertxTimer();
 	  } catch (e) {
@@ -22835,25 +22614,25 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), (function() { return this; }())))
 
 /***/ },
-/* 179 */
+/* 174 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 180 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(181);
+	__webpack_require__(176);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 181 */
+/* 176 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -23290,6 +23069,236 @@
 	  self.fetch.polyfill = true
 	})(typeof self !== 'undefined' ? self : this);
 
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _SaltyMeter = __webpack_require__(178);
+	
+	var _SaltyMeter2 = _interopRequireDefault(_SaltyMeter);
+	
+	var _LatestResults = __webpack_require__(179);
+	
+	var _LatestResults2 = _interopRequireDefault(_LatestResults);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (_ref) {
+	  var players = _ref.players;
+	  var results = _ref.results;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'app-content' },
+	    _react2.default.createElement(_SaltyMeter2.default, { players: players }),
+	    _react2.default.createElement(_LatestResults2.default, { results: results })
+	  );
+	};
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var renderRow = function renderRow(player, index) {
+	  return _react2.default.createElement(
+	    "li",
+	    { key: index },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "name" },
+	      player.name
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "score" },
+	      player.salt
+	    )
+	  );
+	};
+	
+	var renderRows = function renderRows(players) {
+	  return players.sort(function (a, b) {
+	    if (a.salt === b.salt) {
+	      return 0;
+	    }
+	    return a.salt < b.salt ? 1 : -1;
+	  }).map(function (player, i) {
+	    return renderRow(player, i);
+	  });
+	};
+	
+	exports.default = function (_ref) {
+	  var players = _ref.players;
+	  return _react2.default.createElement(
+	    "section",
+	    { className: "component__SaltyMeter block" },
+	    _react2.default.createElement(
+	      "header",
+	      null,
+	      _react2.default.createElement(
+	        "h1",
+	        null,
+	        "Salt-y-Meter"
+	      )
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "content" },
+	      _react2.default.createElement(
+	        "ul",
+	        null,
+	        renderRows(players)
+	      )
+	    )
+	  );
+	};
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _ResultRow = __webpack_require__(180);
+	
+	var _ResultRow2 = _interopRequireDefault(_ResultRow);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var renderResults = function renderResults(results) {
+	  return results.map(function (result, i) {
+	    return _react2.default.createElement(_ResultRow2.default, _extends({}, result, { winner: result.score[0] > result.score[1] ? 0 : 1, key: i }));
+	  });
+	};
+	
+	var LatestResults = function LatestResults(props) {
+	  return _react2.default.createElement(
+	    'section',
+	    { className: 'block component__LatestResults' },
+	    _react2.default.createElement(
+	      'header',
+	      null,
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        'Latest Results'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'content' },
+	      _react2.default.createElement(
+	        'ul',
+	        null,
+	        renderResults(props.results)
+	      )
+	    )
+	  );
+	};
+	
+	LatestResults.propTypes = {
+	  results: _react.PropTypes.array.isRequired
+	};
+	
+	exports.default = LatestResults;
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ResultRow = function ResultRow(_ref) {
+	  var players = _ref.players;
+	  var score = _ref.score;
+	  var characters = _ref.characters;
+	  var winner = _ref.winner;
+	
+	  var p = players.map(function (name, index) {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'player p' + (index + 1) + ' ' + (index === winner ? 'winner' : 'loser'), key: index },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'name' },
+	        name
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'icon' },
+	        _react2.default.createElement('img', { src: 'public/images/characters/small/' + characters[index] + '.png' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'score' },
+	        score[index]
+	      )
+	    );
+	  });
+	
+	  return _react2.default.createElement(
+	    'li',
+	    null,
+	    p
+	  );
+	};
+	
+	ResultRow.propTypes = {
+	  players: _react.PropTypes.array.isRequired,
+	  characters: _react.PropTypes.array.isRequired,
+	  score: _react.PropTypes.array.isRequired,
+	  winner: _react.PropTypes.number.isRequired
+	};
+	
+	exports.default = ResultRow;
+
+/***/ },
+/* 181 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

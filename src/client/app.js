@@ -12,11 +12,11 @@ import '../scss/app.scss';
 es6Promise.polyfill();
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('/api/all')
+  fetch('/api/v1/players')
     .then(response => response.json())
     .then((data) => {
       ReactDOM.render(
-        <App {...data} />,
+        <App players={data} results={[]} />,
         document.getElementById('root')
       );
     });
