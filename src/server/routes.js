@@ -1,5 +1,4 @@
 import * as players from './api/players';
-import * as multi from './controllers/multi';
 
 
 export default (app) => {
@@ -11,6 +10,5 @@ export default (app) => {
   app.delete('/players/:id', players.deletePlayer);
   */
 
-  app.get('/api/all', multi.all);
   app.get('/api/v1/players', players.all);
 };

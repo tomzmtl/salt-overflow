@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 import dotEnv from 'dotenv';
-import omit from 'lodash.omit';
+import map from '../players/map';
 
 
 export default null;
@@ -16,14 +16,7 @@ export const all = (req, res) => {
   MongoClient.connect(url, (err, db) => {
     const collection = db.collection('players');
     collection.find().toArray().then((r) => {
-      res.send(r.map((row) => {
-        return omit(Object.assign(row, {
-          played_characters: [],
-          win_percent: 0,
-          games_played: 0,
-          sessions_played: 0,
-        }), ['_id']);
-      }));
+      res.send(map(r));
     });
     db.close();
   });
