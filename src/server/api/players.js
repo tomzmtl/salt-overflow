@@ -15,12 +15,12 @@ export const all = (req, res) => {
   MongoClient.connect(url, (err, db) => {
     const collection = db.collection('players');
     collection.find().toArray().then((r) => {
-      res.send(Object.assign(r, {
+      res.send(r.map(row => Object.assign(row, {
         played_characters: [],
         win_percent: 0,
         games_played: 0,
         sessions_played: 0,
-      }));
+      })));
     });
     db.close();
   });
