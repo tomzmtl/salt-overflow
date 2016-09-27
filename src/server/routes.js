@@ -1,4 +1,5 @@
 import * as players from './api/players';
+import * as games from './api/games';
 
 
 export default (app) => {
@@ -11,4 +12,5 @@ export default (app) => {
   */
 
   app.get('/api/v1/players', players.all);
+  app.get('/api/v1/games', games.all);
 };
