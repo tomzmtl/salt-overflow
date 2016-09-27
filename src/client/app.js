@@ -11,13 +11,18 @@ import '../scss/app.scss';
 
 es6Promise.polyfill();
 
+const render = (data) => {
+  ReactDOM.render(
+    <App players={data[0]} games={data[1]} />,
+    document.getElementById('root')
+  );
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('/api/v1/players')
-    .then(response => response.json())
-    .then((data) => {
-      ReactDOM.render(
-        <App players={data} results={[]} />,
-        document.getElementById('root')
-      );
-    });
+  const calls = [
+    fetch('/api/v1/players').then(r => r.json()),
+    fetch('/api/v1/games').then(r => r.json()),
+  ];
+
+  Promise.all(calls).then(render);
 });

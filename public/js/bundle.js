@@ -79,12 +79,18 @@
 	
 	_es6Promise2.default.polyfill();
 	
+	var render = function render(data) {
+	  _reactDom2.default.render(_react2.default.createElement(_App2.default, { players: data[0], games: data[1] }), document.getElementById('root'));
+	};
+	
 	document.addEventListener('DOMContentLoaded', function () {
-	  fetch('/api/v1/players').then(function (response) {
-	    return response.json();
-	  }).then(function (data) {
-	    _reactDom2.default.render(_react2.default.createElement(_App2.default, { players: data, results: [] }), document.getElementById('root'));
-	  });
+	  var calls = [fetch('/api/v1/players').then(function (r) {
+	    return r.json();
+	  }), fetch('/api/v1/games').then(function (r) {
+	    return r.json();
+	  })];
+	
+	  Promise.all(calls).then(render);
 	});
 
 /***/ },
@@ -23096,12 +23102,12 @@
 	
 	exports.default = function (_ref) {
 	  var players = _ref.players;
-	  var results = _ref.results;
+	  var games = _ref.games;
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'app-content' },
 	    _react2.default.createElement(_SaltyMeter2.default, { players: players }),
-	    _react2.default.createElement(_LatestResults2.default, { results: results })
+	    _react2.default.createElement(_LatestResults2.default, { games: games })
 	  );
 	};
 
@@ -23197,9 +23203,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var renderResults = function renderResults(results) {
-	  return results.map(function (result, i) {
-	    return _react2.default.createElement(_ResultRow2.default, _extends({}, result, { winner: result.score[0] > result.score[1] ? 0 : 1, key: i }));
+	var renderResults = function renderResults(games) {
+	  return games.slice(0, 8).map(function (game, i) {
+	    return _react2.default.createElement(_ResultRow2.default, _extends({}, game, { winner: game.score[0] > game.score[1] ? 0 : 1, key: i }));
 	  });
 	};
 	
@@ -23222,14 +23228,14 @@
 	      _react2.default.createElement(
 	        'ul',
 	        null,
-	        renderResults(props.results)
+	        renderResults(props.games)
 	      )
 	    )
 	  );
 	};
 	
 	LatestResults.propTypes = {
-	  results: _react.PropTypes.array.isRequired
+	  games: _react.PropTypes.array.isRequired
 	};
 	
 	exports.default = LatestResults;
@@ -23256,7 +23262,8 @@
 	  var characters = _ref.characters;
 	  var winner = _ref.winner;
 	
-	  var p = players.map(function (name, index) {
+	  var p = players.map(function (_ref2, index) {
+	    var name = _ref2.name;
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'player p' + (index + 1) + ' ' + (index === winner ? 'winner' : 'loser'), key: index },
@@ -23268,7 +23275,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'icon' },
-	        _react2.default.createElement('img', { src: 'public/images/characters/small/' + characters[index] + '.png' })
+	        _react2.default.createElement('img', { src: 'public/images/characters/small/' + characters[index].code + '.png' })
 	      ),
 	      _react2.default.createElement(
 	        'div',
