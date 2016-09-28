@@ -3,26 +3,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import es6Promise from 'es6-promise';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import 'isomorphic-fetch';
+import reducer from './reducers/app';
+import initialStore from './store';
 
-import App from './components/App';
+import App from './containers/App';
+import { fetchDashboardData } from './actions/actions';
 
 import '../scss/app.scss';
 
+
 es6Promise.polyfill();
 
-const render = (data) => {
-  ReactDOM.render(
-    <App players={data[0]} games={data[1]} />,
-    document.getElementById('root')
-  );
-};
+const store = createStore(
+  reducer, initialStore, applyMiddleware(thunkMiddleware)
+);
 
 document.addEventListener('DOMContentLoaded', () => {
-  const calls = [
-    fetch('/api/v1/players').then(r => r.json()),
-    fetch('/api/v1/games?limit=8').then(r => r.json()),
-  ];
-
-  Promise.all(calls).then(render);
+  store.dispatch(fetchDashboardData()).then(() => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('root')
+    );
+  });
 });
