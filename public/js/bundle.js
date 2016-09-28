@@ -86,7 +86,7 @@
 	document.addEventListener('DOMContentLoaded', function () {
 	  var calls = [fetch('/api/v1/players').then(function (r) {
 	    return r.json();
-	  }), fetch('/api/v1/games').then(function (r) {
+	  }), fetch('/api/v1/games?limit=8').then(function (r) {
 	    return r.json();
 	  })];
 	
@@ -23204,7 +23204,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var renderResults = function renderResults(games) {
-	  return games.slice(0, 8).map(function (game, i) {
+	  return games.map(function (game, i) {
 	    return _react2.default.createElement(_ResultRow2.default, _extends({}, game, { winner: game.score[0] > game.score[1] ? 0 : 1, key: i }));
 	  });
 	};

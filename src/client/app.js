@@ -21,7 +21,7 @@ const render = (data) => {
 document.addEventListener('DOMContentLoaded', () => {
   const calls = [
     fetch('/api/v1/players').then(r => r.json()),
-    fetch('/api/v1/games').then(r => r.json()),
+    fetch('/api/v1/games?limit=8').then(r => r.json()),
   ];
 
   Promise.all(calls).then(render);

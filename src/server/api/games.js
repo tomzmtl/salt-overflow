@@ -12,7 +12,13 @@ export const all = (req, res) => {
   // Use connect method to connect to the server
   MongoClient.connect(url, (err, db) => {
     db.collection('players').find().toArray().then((players) => {
-      db.collection('games').find().toArray().then((games) => {
+      const query = db.collection('games').find();
+
+      if ('limit' in req.query) {
+        query.limit(Number(req.query.limit));
+      }
+
+      query.toArray().then((games) => {
         res.send(mapGames(games, players));
         db.close();
       });
