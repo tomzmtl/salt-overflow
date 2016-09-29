@@ -30336,6 +30336,14 @@
 	        var score = [].concat(_toConsumableArray(form.score));
 	        score[action.index] = action.score;
 	
+	        if (action.score === 2) {
+	          var altIndex = action.index === 0 ? 1 : 0;
+	          var altScore = score[altIndex];
+	          if (altScore === 2) {
+	            score[altIndex] = null;
+	          }
+	        }
+	
 	        return _extends({}, form, {
 	          score: score
 	        });

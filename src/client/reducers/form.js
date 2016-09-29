@@ -25,6 +25,14 @@ export default (form, action) => {
       const score = [...form.score];
       score[action.index] = action.score;
 
+      if (action.score === 2) {
+        const altIndex = action.index === 0 ? 1 : 0;
+        const altScore = score[altIndex];
+        if (altScore === 2) {
+          score[altIndex] = null;
+        }
+      }
+
       return {
         ...form,
         score,

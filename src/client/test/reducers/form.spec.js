@@ -62,4 +62,24 @@ describe('Reducers (form)', () => {
       }
     );
   });
+
+  it('Cancels other player score when score et to 2', () => {
+    testReducer(reducer,
+      {
+        form: {
+          score: [1, 2],
+        },
+      },
+      {
+        type: 'UPDATE_SCORE',
+        index: 0,
+        score: 2,
+      },
+      {
+        form: {
+          score: [2, null],
+        },
+      }
+    );
+  });
 });
