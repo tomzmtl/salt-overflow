@@ -1,3 +1,41 @@
-.component__AddGameForm{
-  flex-direction: column;
+.component__AddGameForm {
+
+}
+
+.component__Player {
+  .active {
+    color: red;
+    font-weight: bold;
+  }
+}
+
+
+.component__NumberSelector {
+  display: flex;
+
+  div {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background: #F6F6F6;
+
+    span {
+      margin: auto;
+    }
+
+    &.active {
+      background: $theme_primary;
+      color: white;
+      font-weight: bold;
+    }
+
+    &:first-child {
+      border-radius: 4px 0 0 4px;
+    }
+
+    &:last-child {
+      border-radius: 0 4px 4px 0;
+    }
+  }
 }

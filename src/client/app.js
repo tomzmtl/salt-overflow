@@ -12,8 +12,8 @@ import reducer from './reducers/app';
 import initialStore from './store';
 import { fetchDashboardData } from './actions/actions';
 
-import App from './containers/App';
-import AddGameForm from './containers/AddGameForm';
+import Dashboard from './containers/Dashboard';
+import AddGameForm from './components/form/AddGameForm';
 
 import '../scss/app.scss';
 
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <Provider store={store}>
         <Router history={browserHistory}>
           <div className="app-content">
-            <Route path="/" component={App} />
+            <Route path="/" component={Dashboard} />
             <Route path="add" component={AddGameForm} />
           </div>
         </Router>
