@@ -1,6 +1,16 @@
 export default (form, action) => {
   switch (action.type) {
 
+    case 'UPDATE_PLAYER': {
+      const players = [...form.players];
+      players[action.index] = action.player;
+
+      return {
+        ...form,
+        players,
+      };
+    }
+
     case 'UPDATE_CHARACTER': {
       const characters = [...form.characters];
       characters[action.index] = action.character;

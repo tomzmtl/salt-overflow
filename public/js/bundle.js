@@ -30280,8 +30280,9 @@
 	        characters: [].concat(_toConsumableArray(action.characters))
 	      });
 	
-	    case 'UPDATE_SCORE':
+	    case 'UPDATE_PLAYER':
 	    case 'UPDATE_CHARACTER':
+	    case 'UPDATE_SCORE':
 	      return _extends({}, state, {
 	        form: (0, _form2.default)(state.form, action)
 	      });
@@ -30309,6 +30310,16 @@
 	
 	exports.default = function (form, action) {
 	  switch (action.type) {
+	
+	    case 'UPDATE_PLAYER':
+	      {
+	        var players = [].concat(_toConsumableArray(form.players));
+	        players[action.index] = action.player;
+	
+	        return _extends({}, form, {
+	          players: players
+	        });
+	      }
 	
 	    case 'UPDATE_CHARACTER':
 	      {
@@ -30348,7 +30359,8 @@
 	  characters: [],
 	  form: {
 	    score: [null, null],
-	    characters: [null, null]
+	    characters: [null, null],
+	    players: [null, null]
 	  },
 	  games: [],
 	  players: []
@@ -30743,20 +30755,28 @@
 	var renderOption = function renderOption(player, i) {
 	  return _react2.default.createElement(
 	    "option",
-	    { key: i },
+	    { key: i, value: player.id },
 	    player.name
 	  );
 	};
 	
 	exports.default = function (_ref) {
+	  var index = _ref.index;
 	  var players = _ref.players;
 	  var onUpdate = _ref.onUpdate;
+	
+	  var handleChange = function handleChange(e) {
+	    var value = players.find(function (c) {
+	      return c.id === e.target.value;
+	    });
+	    onUpdate(index, value);
+	  };
 	  return _react2.default.createElement(
 	    "div",
 	    { className: "component__PlayerSelector" },
 	    _react2.default.createElement(
 	      "select",
-	      null,
+	      { onChange: handleChange },
 	      _react2.default.createElement(
 	        "option",
 	        { value: "" },
