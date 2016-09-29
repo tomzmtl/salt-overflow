@@ -6,8 +6,8 @@
   "repository": "https://github.com/tomzmtl/SaltOverflow",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_ENV=prod ./node_modules/.bin/babel-node --harmony ./src/server/server.js",
-    "dev": "NODE_ENV=dev nodemon --exec babel-node ./src/server/server.js --watch src/server",
+    "start": "NODE_ENV=prod ./node_modules/.bin/babel-node --harmony ./src/server",
+    "dev": "NODE_ENV=dev nodemon --exec babel-node ./src/server --watch src/server",
     "lint": "eslint app/**/*.js || true",
     "webpack": "webpack --watch",
     "server": "NODE_ENV=dev babel-node ./src/server/server.js"
