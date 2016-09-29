@@ -10,7 +10,8 @@
     "dev": "NODE_ENV=dev nodemon --exec babel-node ./src/server --watch src/server",
     "lint": "eslint app/**/*.js || true",
     "webpack": "webpack --watch",
-    "test": "mocha --opts mocha.opts --harmony || true"
+    "test": "mocha --opts mocha.opts --harmony || true",
+    "ci": "mocha --opts mocha.ci.opts --harmony"
   },
   "author": "Justin D'Errico <justinderrico1991@gmail.com>, Thomas Andreo <thomas.andreo@gmail.com>",
   "dependencies": {
