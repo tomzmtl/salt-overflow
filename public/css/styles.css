@@ -491,8 +491,13 @@ select {
     .component__LatestResults li:nth-child(4n+4) {
       margin-right: 0; } }
 
-.component__Player:first-child {
-  margin-bottom: 40px; }
+@media (max-width: 520px) {
+  .component__Player:first-child {
+    margin-bottom: 40px; } }
+
+@media (min-width: 520px) {
+  .component__Player:first-child {
+    margin-right: 30px; } }
 
 .component__NumberSelector {
   display: flex; }

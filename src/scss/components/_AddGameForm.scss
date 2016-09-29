@@ -1,5 +1,20 @@
-.component__Player {
-  &:first-child {
-    margin-bottom: 40px;
+
+@media (max-width: 520px) {
+
+  .component__Player {
+    &:first-child {
+      margin-bottom: 40px;
+    }
   }
+
+}
+
+@media (min-width: 520px) {
+
+  .component__Player {
+    &:first-child {
+      margin-right: 30px;
+    }
+  }
+
 }
