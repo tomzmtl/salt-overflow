@@ -402,6 +402,14 @@ body {
     .block > .content {
       width: 70%; } }
 
+input,
+select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  -webkit-appearance: none; }
+
 .component__SaltyMeter ul {
   margin: 0;
   padding: 0;
@@ -482,9 +490,8 @@ body {
     .component__LatestResults li:nth-child(4n+4) {
       margin-right: 0; } }
 
-.component__Player .active {
-  color: red;
-  font-weight: bold; }
+.component__Player:first-child {
+  margin-bottom: 40px; }
 
 .component__NumberSelector {
   display: flex; }
@@ -493,9 +500,11 @@ body {
     width: 40px;
     height: 40px;
     cursor: pointer;
-    background: #F6F6F6; }
+    background: #f9f9f9; }
     .component__NumberSelector div span {
       margin: auto; }
+    .component__NumberSelector div:hover {
+      background: #f4f4f4; }
     .component__NumberSelector div.active {
       background: #f59214;
       color: white;

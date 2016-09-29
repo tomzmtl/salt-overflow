@@ -15,10 +15,3 @@ export const fetchDashboardData = () => (dispatch) => {
     games: data[1],
   }));
 };
-
-
-export const updateScore = (index, score) => dispatch => dispatch({
-  type: 'UPDATE_SCORE',
-  index,
-  score,
-});

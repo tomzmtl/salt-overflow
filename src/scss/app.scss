@@ -8,7 +8,9 @@ body {
 $theme_primary: #f59214;
 
 @import 'layout';
+@import 'form';
 
 @import 'components/SaltyMeter';
 @import 'components/LatestResults';
 @import 'components/AddGameForm';
+@import 'components/PlayerSelector';

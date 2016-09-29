@@ -30420,16 +30420,6 @@
 	    });
 	  };
 	};
-	
-	var updateScore = exports.updateScore = function updateScore(index, score) {
-	  return function (dispatch) {
-	    return dispatch({
-	      type: 'UPDATE_SCORE',
-	      index: index,
-	      score: score
-	    });
-	  };
-	};
 
 /***/ },
 /* 268 */
@@ -30743,7 +30733,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PlayerSelector = __webpack_require__(276);
+	var _PlayerSelector = __webpack_require__(280);
 	
 	var _PlayerSelector2 = _interopRequireDefault(_PlayerSelector);
 	
@@ -30759,9 +30749,6 @@
 	
 	exports.default = function (_ref) {
 	  var index = _ref.index;
-	  var score = _ref.score;
-	  var onScoreUpdate = _ref.onScoreUpdate;
-	  var players = _ref.players;
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'component__Player' },
@@ -30775,7 +30762,7 @@
 /* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30787,11 +30774,25 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function () {
+	var renderOption = function renderOption(player, i) {
 	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    'Player'
+	    "option",
+	    { key: i },
+	    player.name
+	  );
+	};
+	
+	exports.default = function (_ref) {
+	  var players = _ref.players;
+	  var onUpdate = _ref.onUpdate;
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "component__PlayerSelector" },
+	    _react2.default.createElement(
+	      "select",
+	      null,
+	      players.map(renderOption)
+	    )
 	  );
 	};
 
@@ -30833,7 +30834,7 @@
 	
 	var _reactRedux = __webpack_require__(175);
 	
-	var _actions = __webpack_require__(267);
+	var _form = __webpack_require__(281);
 	
 	var _ScoreSelector = __webpack_require__(279);
 	
@@ -30851,7 +30852,7 @@
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
 	    onUpdate: function onUpdate(index, value) {
-	      dispatch((0, _actions.updateScore)(index, value));
+	      dispatch((0, _form.updateScore)(index, value));
 	    }
 	  };
 	};
@@ -30911,6 +30912,73 @@
 	      return renderOption(i, score === i);
 	    })
 	  );
+	};
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _reactRedux = __webpack_require__(175);
+	
+	var _form = __webpack_require__(281);
+	
+	var _PlayerSelector = __webpack_require__(276);
+	
+	var _PlayerSelector2 = _interopRequireDefault(_PlayerSelector);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return _extends({}, ownProps, {
+	    players: state.players
+	  });
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onUpdate: function onUpdate(index, value) {
+	      dispatch((0, _form.updatePlayer)(index, value));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_PlayerSelector2.default);
+
+/***/ },
+/* 281 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var updateScore = exports.updateScore = function updateScore(index, value) {
+	  return function (dispatch) {
+	    return dispatch({
+	      type: 'UPDATE_SCORE',
+	      index: index,
+	      score: value
+	    });
+	  };
+	};
+	
+	var updatePlayer = exports.updatePlayer = function updatePlayer(index, value) {
+	  return function (dispatch) {
+	    return dispatch({
+	      type: 'UPDATE_SCORE',
+	      index: index,
+	      player: value
+	    });
+	  };
 	};
 
 /***/ }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateScore } from '../actions/actions';
+import { updateScore } from '../actions/form';
 import ScoreSelector from '../components/form/ScoreSelector';
 
 const mapStateToProps = (state, ownProps) => ({
