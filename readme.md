@@ -1,6 +1,4 @@
-# Salt Overflow
-
-New version of [Saltistic](https://github.com/tomzmtl/Saltistic).
+# Salt Overflow ![](https://api.travis-ci.org/tomzmtl/SaltOverflow.svg)
 
 ## Installation
 
