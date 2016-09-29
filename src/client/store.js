@@ -1,7 +1,8 @@
 export default {
   characters: [],
   form: {
-    score: [0, 0],
+    score: [null, null],
+    characters: [null, null],
   },
   games: [],
   players: [],

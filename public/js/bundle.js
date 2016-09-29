@@ -30281,6 +30281,7 @@
 	      });
 	
 	    case 'UPDATE_SCORE':
+	    case 'UPDATE_CHARACTER':
 	      return _extends({}, state, {
 	        form: (0, _form2.default)(state.form, action)
 	      });
@@ -30309,6 +30310,16 @@
 	exports.default = function (form, action) {
 	  switch (action.type) {
 	
+	    case 'UPDATE_CHARACTER':
+	      {
+	        var characters = [].concat(_toConsumableArray(form.characters));
+	        characters[action.index] = action.character;
+	
+	        return _extends({}, form, {
+	          characters: characters
+	        });
+	      }
+	
 	    case 'UPDATE_SCORE':
 	      {
 	        var score = [].concat(_toConsumableArray(form.score));
@@ -30336,7 +30347,8 @@
 	exports.default = {
 	  characters: [],
 	  form: {
-	    score: [0, 0]
+	    score: [null, null],
+	    characters: [null, null]
 	  },
 	  games: [],
 	  players: []
@@ -30745,6 +30757,11 @@
 	    _react2.default.createElement(
 	      "select",
 	      null,
+	      _react2.default.createElement(
+	        "option",
+	        { value: "" },
+	        "Choose player..."
+	      ),
 	      players.map(renderOption)
 	    )
 	  );
@@ -30775,14 +30792,37 @@
 	};
 	
 	exports.default = function (_ref) {
+	  var index = _ref.index;
 	  var characters = _ref.characters;
 	  var onUpdate = _ref.onUpdate;
+	
+	  var handleChange = function handleChange(e) {
+	    var value = characters.find(function (c) {
+	      return c.code === e.target.value;
+	    });
+	    onUpdate(index, value);
+	  };
 	  return _react2.default.createElement(
 	    "div",
 	    { className: "component__CharacterSelector" },
 	    _react2.default.createElement(
 	      "select",
-	      null,
+	      { onChange: handleChange },
+	      _react2.default.createElement(
+	        "option",
+	        { value: "" },
+	        "Choose character..."
+	      ),
+	      _react2.default.createElement(
+	        "option",
+	        { disabled: true },
+	        "Favorites"
+	      ),
+	      _react2.default.createElement(
+	        "option",
+	        { disabled: true },
+	        "All"
+	      ),
 	      characters.map(renderOption)
 	    )
 	  );
@@ -30942,9 +30982,19 @@
 	var updatePlayer = exports.updatePlayer = function updatePlayer(index, value) {
 	  return function (dispatch) {
 	    return dispatch({
-	      type: 'UPDATE_SCORE',
+	      type: 'UPDATE_PLAYER',
 	      index: index,
 	      player: value
+	    });
+	  };
+	};
+	
+	var updateCharacter = exports.updateCharacter = function updateCharacter(index, value) {
+	  return function (dispatch) {
+	    return dispatch({
+	      type: 'UPDATE_CHARACTER',
+	      index: index,
+	      character: value
 	    });
 	  };
 	};
@@ -30979,11 +31029,9 @@
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	  return {
-	    /*
-	      onUpdate: (index, value) => {
-	        dispatch(updatePlayer(index, value));
-	      },
-	      */
+	    onUpdate: function onUpdate(index, value) {
+	      dispatch((0, _form.updateCharacter)(index, value));
+	    }
 	  };
 	};
 	

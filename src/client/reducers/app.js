@@ -15,6 +15,7 @@ export default (state, action) => {
       };
 
     case 'UPDATE_SCORE':
+    case 'UPDATE_CHARACTER':
       return {
         ...state,
         form: form(state.form, action),

@@ -8,10 +8,19 @@ const renderOption = (character, i) => (
 );
 
 
-export default ({ characters, onUpdate }) => (
-  <div className="component__CharacterSelector">
-    <select>
-      {characters.map(renderOption)}
-    </select>
-  </div>
-);
+export default ({ index, characters, onUpdate }) => {
+  const handleChange = (e) => {
+    const value = characters.find(c => c.code === e.target.value);
+    onUpdate(index, value);
+  };
+  return (
+    <div className="component__CharacterSelector">
+      <select onChange={handleChange}>
+        <option value="">Choose character...</option>
+        <option disabled>Favorites</option>
+        <option disabled>All</option>
+        {characters.map(renderOption)}
+      </select>
+    </div>
+  );
+};

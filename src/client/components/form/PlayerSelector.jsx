@@ -11,6 +11,7 @@ const renderOption = (player, i) => (
 export default ({ players, onUpdate }) => (
   <div className="component__PlayerSelector">
     <select>
+      <option value="">Choose player...</option>
       {players.map(renderOption)}
     </select>
   </div>
