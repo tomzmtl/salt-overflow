@@ -113,8 +113,12 @@
 	      _react2.default.createElement(
 	        _reactRouter.Router,
 	        { history: _reactRouter.browserHistory },
-	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'add', component: _AddGameForm2.default })
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'app-content' },
+	          _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default }),
+	          _react2.default.createElement(_reactRouter.Route, { path: 'add', component: _AddGameForm2.default })
+	        )
 	      )
 	    ), document.getElementById('root'));
 	  });
@@ -24843,6 +24847,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(212);
+	
 	var _SaltyMeter = __webpack_require__(207);
 	
 	var _SaltyMeter2 = _interopRequireDefault(_SaltyMeter);
@@ -24851,8 +24857,6 @@
 	
 	var _LatestResults2 = _interopRequireDefault(_LatestResults);
 	
-	var _reactRouter = __webpack_require__(212);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = function (_ref) {
@@ -24860,7 +24864,7 @@
 	  var games = _ref.games;
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'app-content' },
+	    null,
 	    _react2.default.createElement(_SaltyMeter2.default, { players: players }),
 	    _react2.default.createElement(_LatestResults2.default, { games: games }),
 	    _react2.default.createElement(
@@ -30674,7 +30678,83 @@
 /* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _NumberSelector = __webpack_require__(275);
+	
+	var _NumberSelector2 = _interopRequireDefault(_NumberSelector);
+	
+	var _PlayerSelector = __webpack_require__(277);
+	
+	var _PlayerSelector2 = _interopRequireDefault(_PlayerSelector);
+	
+	var _CharacterSelector = __webpack_require__(278);
+	
+	var _CharacterSelector2 = _interopRequireDefault(_CharacterSelector);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'component__AddGameForm block' },
+	      _react2.default.createElement(_PlayerSelector2.default, null),
+	      _react2.default.createElement(_CharacterSelector2.default, null),
+	      _react2.default.createElement(_NumberSelector2.default, { numbers: [0, 1, 2] })
+	    )
+	  );
+	};
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var renderOption = function renderOption(index) {
+	  return _react2.default.createElement(
+	    'div',
+	    { key: index },
+	    index
+	  );
+	};
+	
+	exports.default = function (_ref) {
+	  var numbers = _ref.numbers;
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    numbers.map(renderOption)
+	  );
+	};
+
+/***/ },
+/* 276 */,
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30688,9 +30768,33 @@
 	
 	exports.default = function () {
 	  return _react2.default.createElement(
-	    "div",
-	    { className: "app-content" },
-	    "ADDGAMEFORM"
+	    'div',
+	    null,
+	    'Player'
+	  );
+	};
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    'Character'
 	  );
 	};
 

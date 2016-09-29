@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router';
 import SaltyMeter from './SaltyMeter';
 import LatestResults from './LatestResults';
-import { Link } from 'react-router';
 
 
 export default ({ players, games }) => (
-  <div className="app-content">
+  <div>
     <SaltyMeter players={players} />
     <LatestResults games={games} />
     <Link to="/add">Add</Link>

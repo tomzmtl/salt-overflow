@@ -29,8 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ReactDOM.render(
       <Provider store={store}>
         <Router history={browserHistory}>
-          <Route path="/" component={App} />
-          <Route path="add" component={AddGameForm} />
+          <div className="app-content">
+            <Route path="/" component={App} />
+            <Route path="add" component={AddGameForm} />
+          </div>
         </Router>
       </Provider>,
       document.getElementById('root')
