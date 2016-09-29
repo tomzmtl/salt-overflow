@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import map from '../players/map';
+import { mapPlayers } from '../helpers';
 
 
 export default null;
@@ -13,7 +13,7 @@ export const all = (req, res) => {
   MongoClient.connect(url, (err, db) => {
     const collection = db.collection('players');
     collection.find().toArray().then((r) => {
-      res.send(map(r));
+      res.send(mapPlayers(r));
     });
     db.close();
   });

@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import mapGames from '../games/map';
+import { mapGames, mapPlayers } from '../helpers';
 
 
 export default null;
@@ -19,7 +19,7 @@ export const all = (req, res) => {
       }
 
       query.toArray().then((games) => {
-        res.send(mapGames(games, players));
+        res.send(mapGames(games, mapPlayers(players)));
         db.close();
       });
     });
