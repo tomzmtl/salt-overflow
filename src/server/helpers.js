@@ -32,11 +32,11 @@ export const mapGames = (games, players) =>
 
 export const mapPlayers = players =>
   players.map(row => Object.assign(
-    idfy(row),
     {
       played_characters: [],
       win_percent: 0,
       games_played: 0,
       sessions_played: 0,
-    }
+    },
+    idfy(row)
   ));
