@@ -63,7 +63,7 @@ describe('Reducers (form)', () => {
     );
   });
 
-  it('Cancels other player score when score et to 2', () => {
+  it('Prevents both players from having a score of 2', () => {
     testReducer(reducer,
       {
         form: {

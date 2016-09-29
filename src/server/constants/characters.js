@@ -55,6 +55,7 @@ export default [
     [10, 'zel', 'Zelda'],
     [15, 'zss', 'Zero Suit Samus'],
 ].map(char => ({
+  id: char[0],
   code: char[1],
   name: char[2],
 }));

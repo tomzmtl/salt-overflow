@@ -30799,7 +30799,7 @@
 /* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30811,17 +30811,30 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var renderOption = function renderOption(character, i) {
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	var renderOption = function renderOption(label, value, key) {
+	  var optProps = {
+	    key: key
+	  };
+	
+	  if (value === false) {
+	    optProps.disabled = true;
+	  } else {
+	    optProps.value = value;
+	  }
+	
 	  return _react2.default.createElement(
-	    "option",
-	    { key: i, value: character.code },
-	    character.name
+	    'option',
+	    optProps,
+	    label
 	  );
 	};
 	
 	exports.default = function (_ref) {
 	  var index = _ref.index;
 	  var characters = _ref.characters;
+	  var players = _ref.players;
 	  var onUpdate = _ref.onUpdate;
 	
 	  var handleChange = function handleChange(e) {
@@ -30830,28 +30843,43 @@
 	    });
 	    onUpdate(index, value);
 	  };
+	
+	  var mapCharacters = function mapCharacters(favorites) {
+	    return favorites.map(function (id) {
+	      var character = characters.find(function (c) {
+	        return c.id === id;
+	      });
+	      return [character.name, character.code];
+	    });
+	  };
+	
+	  var renderCharacterList = function renderCharacterList() {
+	    var schema = [['Choose character...', '']];
+	
+	    if (players[index]) {
+	      var favorites = players[index].played_characters;
+	
+	      if (favorites.length) {
+	        schema = schema.concat([['Favorites', false]].concat(_toConsumableArray(mapCharacters(favorites)), [['All', false]]));
+	      }
+	    }
+	
+	    schema = schema.concat(mapCharacters(characters.map(function (c) {
+	      return c.id;
+	    })));
+	
+	    return schema.map(function (data, i) {
+	      return renderOption(data[0], data[1], i);
+	    });
+	  };
+	
 	  return _react2.default.createElement(
-	    "div",
-	    { className: "component__CharacterSelector" },
+	    'div',
+	    { className: 'component__CharacterSelector' },
 	    _react2.default.createElement(
-	      "select",
+	      'select',
 	      { onChange: handleChange },
-	      _react2.default.createElement(
-	        "option",
-	        { value: "" },
-	        "Choose character..."
-	      ),
-	      _react2.default.createElement(
-	        "option",
-	        { disabled: true },
-	        "Favorites"
-	      ),
-	      _react2.default.createElement(
-	        "option",
-	        { disabled: true },
-	        "All"
-	      ),
-	      characters.map(renderOption)
+	      renderCharacterList()
 	    )
 	  );
 	};
@@ -31051,7 +31079,8 @@
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return _extends({}, ownProps, {
-	    characters: state.characters
+	    characters: state.characters,
+	    players: state.form.players
 	  });
 	};
 	

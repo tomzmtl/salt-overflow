@@ -5,6 +5,7 @@ import CharacterSelector from '../components/form/CharacterSelector';
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   characters: state.characters,
+  players: state.form.players,
 });
 
 const mapDispatchToProps = dispatch => ({
