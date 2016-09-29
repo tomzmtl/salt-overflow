@@ -5,6 +5,10 @@ module.exports = {
   },
   env: {
     browser: true,
+    mocha: true,
+  },
+  globals: {
+    expect: true,
   },
   rules: {
     'jsx-a11y/img-has-alt': 'off',

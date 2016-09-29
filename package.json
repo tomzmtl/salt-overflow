@@ -10,7 +10,7 @@
     "dev": "NODE_ENV=dev nodemon --exec babel-node ./src/server --watch src/server",
     "lint": "eslint app/**/*.js || true",
     "webpack": "webpack --watch",
-    "server": "NODE_ENV=dev babel-node ./src/server/server.js"
+    "test": "mocha --opts mocha.opts --harmony || true"
   },
   "author": "Justin D'Errico <justinderrico1991@gmail.com>, Thomas Andreo <thomas.andreo@gmail.com>",
   "dependencies": {
@@ -25,11 +25,13 @@
     "debug": "^2.2.0",
     "dotenv": "^2.0.0",
     "es6-promise": "^3.3.1",
+    "expectations": "^0.6.0",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "isomorphic-fetch": "^2.2.1",
     "lodash.omit": "^4.5.0",
     "lodash.pick": "^4.4.0",
+    "mocha": "^3.1.0",
     "mongodb": "^2.2.10",
     "nodemailer": "^2.4.2",
     "pg": "^6.0.1",
