@@ -5,8 +5,6 @@ export default (form, action) => {
       const score = [...form.score];
       score[action.index] = action.score;
 
-      console.log(111, action);
-
       return {
         ...form,
         score,

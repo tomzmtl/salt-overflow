@@ -1,5 +1,4 @@
 import { MongoClient } from 'mongodb';
-import dotEnv from 'dotenv';
 import map from '../players/map';
 
 
@@ -7,8 +6,6 @@ export default null;
 
 
 export const all = (req, res) => {
-  dotEnv.config();
-
   // Connection URL
   const url = process.env.MONGODB_URI;
 

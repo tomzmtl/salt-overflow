@@ -1,6 +1,6 @@
 import React from 'react';
 import PlayerSelector from '../../containers/PlayerSelector';
-import CharacterSelector from './CharacterSelector';
+import CharacterSelector from '../../containers/CharacterSelector';
 import ScoreSelector from '../../containers/ScoreSelector';
 
 export default ({ index }) => (

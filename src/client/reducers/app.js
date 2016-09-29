@@ -1,17 +1,17 @@
-import games from './games';
-import players from './players';
+// import games from './games';
+// import players from './players';
 import form from './form';
 
 
 export default (state, action) => {
-  console.log(action.type);
   switch (action.type) {
 
     case 'RECEIVE_DASHBOARD_DATA':
       return {
         ...state,
-        games: games(state.games, action),
-        players: players(state.players, action),
+        games: [...action.games],
+        players: [...action.players],
+        characters: [...action.characters],
       };
 
     case 'UPDATE_SCORE':

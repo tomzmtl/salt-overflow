@@ -1,7 +1,8 @@
 export default {
-  games: [],
-  players: [],
+  characters: [],
   form: {
     score: [0, 0],
   },
+  games: [],
+  players: [],
 };

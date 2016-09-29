@@ -30258,15 +30258,9 @@
 	  value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // import games from './games';
+	// import players from './players';
 	
-	var _games = __webpack_require__(263);
-	
-	var _games2 = _interopRequireDefault(_games);
-	
-	var _players = __webpack_require__(264);
-	
-	var _players2 = _interopRequireDefault(_players);
 	
 	var _form = __webpack_require__(265);
 	
@@ -30274,14 +30268,16 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
 	exports.default = function (state, action) {
-	  console.log(action.type);
 	  switch (action.type) {
 	
 	    case 'RECEIVE_DASHBOARD_DATA':
 	      return _extends({}, state, {
-	        games: (0, _games2.default)(state.games, action),
-	        players: (0, _players2.default)(state.players, action)
+	        games: [].concat(_toConsumableArray(action.games)),
+	        players: [].concat(_toConsumableArray(action.players)),
+	        characters: [].concat(_toConsumableArray(action.characters))
 	      });
 	
 	    case 'UPDATE_SCORE':
@@ -30295,52 +30291,8 @@
 	};
 
 /***/ },
-/* 263 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	exports.default = function (games, action) {
-	  switch (action.type) {
-	
-	    case 'RECEIVE_DASHBOARD_DATA':
-	      return [].concat(_toConsumableArray(action.games));
-	
-	    default:
-	      return games;
-	  }
-	};
-
-/***/ },
-/* 264 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	exports.default = function (players, action) {
-	  switch (action.type) {
-	
-	    case 'RECEIVE_DASHBOARD_DATA':
-	      return [].concat(_toConsumableArray(action.players));
-	
-	    default:
-	      return players;
-	  }
-	};
-
-/***/ },
+/* 263 */,
+/* 264 */,
 /* 265 */
 /***/ function(module, exports) {
 
@@ -30362,8 +30314,6 @@
 	        var score = [].concat(_toConsumableArray(form.score));
 	        score[action.index] = action.score;
 	
-	        console.log(111, action);
-	
 	        return _extends({}, form, {
 	          score: score
 	        });
@@ -30384,11 +30334,12 @@
 	  value: true
 	});
 	exports.default = {
-	  games: [],
-	  players: [],
+	  characters: [],
 	  form: {
 	    score: [0, 0]
-	  }
+	  },
+	  games: [],
+	  players: []
 	};
 
 /***/ },
@@ -30409,13 +30360,16 @@
 	      return r.json();
 	    }), fetch('/api/v1/games?limit=8').then(function (r) {
 	      return r.json();
+	    }), fetch('/api/v1/characters').then(function (r) {
+	      return r.json();
 	    })];
 	
 	    return Promise.all(calls).then(function (data) {
 	      return dispatch({
 	        type: 'RECEIVE_DASHBOARD_DATA',
 	        players: data[0],
-	        games: data[1]
+	        games: data[1],
+	        characters: data[2]
 	      });
 	    });
 	  };
@@ -30737,7 +30691,7 @@
 	
 	var _PlayerSelector2 = _interopRequireDefault(_PlayerSelector);
 	
-	var _CharacterSelector = __webpack_require__(277);
+	var _CharacterSelector = __webpack_require__(282);
 	
 	var _CharacterSelector2 = _interopRequireDefault(_CharacterSelector);
 	
@@ -30800,7 +30754,7 @@
 /* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30812,11 +30766,25 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function () {
+	var renderOption = function renderOption(character, i) {
 	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    'Character'
+	    "option",
+	    { key: i, value: character.code },
+	    character.name
+	  );
+	};
+	
+	exports.default = function (_ref) {
+	  var characters = _ref.characters;
+	  var onUpdate = _ref.onUpdate;
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "component__CharacterSelector" },
+	    _react2.default.createElement(
+	      "select",
+	      null,
+	      characters.map(renderOption)
+	    )
 	  );
 	};
 
@@ -30980,6 +30948,46 @@
 	    });
 	  };
 	};
+
+/***/ },
+/* 282 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _reactRedux = __webpack_require__(175);
+	
+	var _form = __webpack_require__(281);
+	
+	var _CharacterSelector = __webpack_require__(277);
+	
+	var _CharacterSelector2 = _interopRequireDefault(_CharacterSelector);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return _extends({}, ownProps, {
+	    characters: state.characters
+	  });
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    /*
+	      onUpdate: (index, value) => {
+	        dispatch(updatePlayer(index, value));
+	      },
+	      */
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_CharacterSelector2.default);
 
 /***/ }
 /******/ ]);
