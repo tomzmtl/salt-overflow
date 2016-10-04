@@ -1,0 +1,12 @@
+.btn {
+  padding: 8px 15px;
+  background: $theme-primary;
+  color: white;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: darken($theme-primary, 5%);
+  }
+}

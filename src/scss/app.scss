@@ -5,12 +5,15 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+* { box-sizing: border-box }
+
 $theme_primary: #f59214;
 
 @import 'layout';
 @import 'form';
+@import 'button';
 
 @import 'components/SaltyMeter';
 @import 'components/LatestResults';
 @import 'components/AddGameForm';
-@import 'components/PlayerSelector';
+@import 'components/NumberSelector';

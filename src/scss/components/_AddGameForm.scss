@@ -1,3 +1,15 @@
+.component__AddGameForm {
+  display: block;
+
+  .fields {
+    max-width: 500px;
+  }
+
+  .btn {
+    margin-top: 35px;
+  }
+}
+
 
 @media (max-width: 520px) {
 
@@ -10,6 +22,16 @@
 }
 
 @media (min-width: 520px) {
+
+  .component__AddGameForm {
+    .fields {
+      display: flex;
+
+      > div {
+        width: 50%;
+      }
+    }
+  }
 
   .component__Player {
     &:first-child {

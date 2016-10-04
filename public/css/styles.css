@@ -368,6 +368,9 @@ body {
   background: #FCFCFC;
   font-family: 'Poppins', sans-serif; }
 
+* {
+  box-sizing: border-box; }
+
 .main-header {
   padding: 20px 20px 14px 20px;
   border-bottom: 3px solid #f59214;
@@ -408,8 +411,20 @@ select {
   width: 100%;
   padding: 6px 10px;
   margin-bottom: 5px;
-  border-radius: 6px;
+  border-radius: 2px;
+  border: 1px solid #BBB;
+  background: white;
   -webkit-appearance: none; }
+
+.btn {
+  padding: 8px 15px;
+  background: #f59214;
+  color: white;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer; }
+  .btn:hover {
+    background: #e6850a; }
 
 .component__SaltyMeter ul {
   margin: 0;
@@ -491,11 +506,22 @@ select {
     .component__LatestResults li:nth-child(4n+4) {
       margin-right: 0; } }
 
+.component__AddGameForm {
+  display: block; }
+  .component__AddGameForm .fields {
+    max-width: 500px; }
+  .component__AddGameForm .btn {
+    margin-top: 35px; }
+
 @media (max-width: 520px) {
   .component__Player:first-child {
     margin-bottom: 40px; } }
 
 @media (min-width: 520px) {
+  .component__AddGameForm .fields {
+    display: flex; }
+    .component__AddGameForm .fields > div {
+      width: 50%; }
   .component__Player:first-child {
     margin-right: 30px; } }
 
@@ -506,7 +532,8 @@ select {
     width: 40px;
     height: 40px;
     cursor: pointer;
-    background: #f9f9f9; }
+    background: #f9f9f9;
+    border-left: 1px solid #EEE; }
     .component__NumberSelector div span {
       margin: auto; }
     .component__NumberSelector div:hover {
@@ -516,7 +543,8 @@ select {
       color: white;
       font-weight: bold; }
     .component__NumberSelector div:first-child {
-      border-radius: 4px 0 0 4px; }
+      border-radius: 4px 0 0 4px;
+      border-left: 0; }
     .component__NumberSelector div:last-child {
       border-radius: 0 4px 4px 0; }
 

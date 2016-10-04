@@ -7,6 +7,7 @@
     height: 40px;
     cursor: pointer;
     background: #f9f9f9;
+    border-left: 1px solid #EEE;
 
     span {
       margin: auto;
@@ -24,6 +25,7 @@
 
     &:first-child {
       border-radius: 4px 0 0 4px;
+      border-left: 0;
     }
 
     &:last-child {

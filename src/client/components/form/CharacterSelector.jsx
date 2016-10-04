@@ -6,15 +6,11 @@ import Option from '../core/Option';
 const findCharById = (characters, id) => characters.find(c => id === c.id);
 
 
-const renderFavorites = (favorites) => {
-  if (!favorites.length) {
-    return null;
+const CharacterSelector = ({ index, characters, players, onUpdate, disable }) => {
+  if (disable) {
+    return <input disabled="true" placeholder="Choose character..." />;
   }
-  return <OptGroup label="Favorites" data={favorites} />;
-};
 
-
-const CharacterSelector = ({ index, characters, players, onUpdate }) => {
   /* Events */
 
   const handleChange = (e) => {
@@ -36,6 +32,13 @@ const CharacterSelector = ({ index, characters, players, onUpdate }) => {
       };
     });
   }
+
+  const renderFavorites = () => {
+    if (!favorites.length) {
+      return null;
+    }
+    return <OptGroup label="Favorites" data={favorites} />;
+  };
 
   /* All */
 
@@ -74,6 +77,7 @@ CharacterSelector.propTypes = {
   index: PropTypes.number,
   characters: PropTypes.arrayOf(PropTypes.object),
   players: PropTypes.arrayOf(PropTypes.object),
+  disable: PropTypes.bool,
   onUpdate: PropTypes.func,
 };
 

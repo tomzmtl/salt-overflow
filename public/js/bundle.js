@@ -30680,7 +30680,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Player = __webpack_require__(275);
+	var _Player = __webpack_require__(286);
 	
 	var _Player2 = _interopRequireDefault(_Player);
 	
@@ -30689,12 +30689,17 @@
 	exports.default = function () {
 	  return _react2.default.createElement(
 	    'div',
-	    null,
+	    { className: 'component__AddGameForm block' },
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'component__AddGameForm block' },
+	      { className: 'fields' },
 	      _react2.default.createElement(_Player2.default, { index: 0 }),
 	      _react2.default.createElement(_Player2.default, { index: 1 })
+	    ),
+	    _react2.default.createElement(
+	      'button',
+	      { className: 'btn' },
+	      'Submit'
 	    )
 	  );
 	};
@@ -30719,30 +30724,76 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PlayerSelector = __webpack_require__(280);
+	var _PlayerSelector = __webpack_require__(276);
 	
 	var _PlayerSelector2 = _interopRequireDefault(_PlayerSelector);
 	
-	var _CharacterSelector = __webpack_require__(282);
+	var _CharacterSelector = __webpack_require__(277);
 	
 	var _CharacterSelector2 = _interopRequireDefault(_CharacterSelector);
 	
-	var _ScoreSelector = __webpack_require__(278);
+	var _ScoreSelector = __webpack_require__(279);
 	
 	var _ScoreSelector2 = _interopRequireDefault(_ScoreSelector);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function (_ref) {
-	  var index = _ref.index;
+	var Player = function Player(props) {
+	  // base
+	  var base = {
+	    index: props.index
+	  };
+	
+	  // player selector
+	  var playerSelectorProps = Object.assign({}, base, {
+	    players: props.players,
+	    selection: props.selection.players,
+	    onUpdate: props.onPlayerUpdate
+	  });
+	
+	  // character selector
+	  var characterSelectorProps = Object.assign({}, base, {
+	    characters: props.characters,
+	    players: props.selection.players,
+	    onUpdate: props.onCharacterUpdate,
+	    disable: true
+	  });
+	
+	  if (props.selection.players[props.index]) {
+	    characterSelectorProps.disable = false;
+	  }
+	
+	  // score selector
+	  var scoreSelectorProps = Object.assign({}, base, {
+	    numbers: [0, 1, 2],
+	    score: props.selection.score[props.index],
+	    onUpdate: props.onScoreUpdate
+	  });
+	
+	  // render
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'component__Player' },
-	    _react2.default.createElement(_PlayerSelector2.default, { index: index }),
-	    _react2.default.createElement(_CharacterSelector2.default, { index: index }),
-	    _react2.default.createElement(_ScoreSelector2.default, { index: index })
+	    _react2.default.createElement(_PlayerSelector2.default, playerSelectorProps),
+	    _react2.default.createElement(_CharacterSelector2.default, characterSelectorProps),
+	    _react2.default.createElement(_ScoreSelector2.default, scoreSelectorProps)
 	  );
 	};
+	
+	Player.propTypes = {
+	  index: _react.PropTypes.number,
+	  players: _react.PropTypes.arrayOf(_react.PropTypes.object),
+	  characters: _react.PropTypes.arrayOf(_react.PropTypes.object),
+	  onPlayerUpdate: _react.PropTypes.func,
+	  onCharacterUpdate: _react.PropTypes.func,
+	  onScoreUpdate: _react.PropTypes.func,
+	  selection: _react.PropTypes.shape({
+	    players: _react.PropTypes.arrayOf(_react.PropTypes.object),
+	    score: _react.PropTypes.arrayOf(_react.PropTypes.number)
+	  })
+	};
+	
+	exports.default = Player;
 
 /***/ },
 /* 276 */
@@ -30849,18 +30900,16 @@
 	  });
 	};
 	
-	var renderFavorites = function renderFavorites(favorites) {
-	  if (!favorites.length) {
-	    return null;
-	  }
-	  return _react2.default.createElement(_OptGroup2.default, { label: 'Favorites', data: favorites });
-	};
-	
 	var CharacterSelector = function CharacterSelector(_ref) {
 	  var index = _ref.index;
 	  var characters = _ref.characters;
 	  var players = _ref.players;
 	  var onUpdate = _ref.onUpdate;
+	  var disable = _ref.disable;
+	
+	  if (disable) {
+	    return _react2.default.createElement('input', { disabled: 'true', placeholder: 'Choose character...' });
+	  }
 	
 	  /* Events */
 	
@@ -30885,6 +30934,13 @@
 	      };
 	    });
 	  }
+	
+	  var renderFavorites = function renderFavorites() {
+	    if (!favorites.length) {
+	      return null;
+	    }
+	    return _react2.default.createElement(_OptGroup2.default, { label: 'Favorites', data: favorites });
+	  };
 	
 	  /* All */
 	
@@ -30928,51 +30984,14 @@
 	  index: _react.PropTypes.number,
 	  characters: _react.PropTypes.arrayOf(_react.PropTypes.object),
 	  players: _react.PropTypes.arrayOf(_react.PropTypes.object),
+	  disable: _react.PropTypes.bool,
 	  onUpdate: _react.PropTypes.func
 	};
 	
 	exports.default = CharacterSelector;
 
 /***/ },
-/* 278 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _reactRedux = __webpack_require__(175);
-	
-	var _form = __webpack_require__(281);
-	
-	var _ScoreSelector = __webpack_require__(279);
-	
-	var _ScoreSelector2 = _interopRequireDefault(_ScoreSelector);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  return _extends({}, ownProps, {
-	    numbers: [0, 1, 2],
-	    score: state.form.score[ownProps.index]
-	  });
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    onUpdate: function onUpdate(index, value) {
-	      dispatch((0, _form.updateScore)(index, value));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ScoreSelector2.default);
-
-/***/ },
+/* 278 */,
 /* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31037,45 +31056,7 @@
 	exports.default = ScoreSelector;
 
 /***/ },
-/* 280 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _reactRedux = __webpack_require__(175);
-	
-	var _form = __webpack_require__(281);
-	
-	var _PlayerSelector = __webpack_require__(276);
-	
-	var _PlayerSelector2 = _interopRequireDefault(_PlayerSelector);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  return _extends({}, ownProps, {
-	    players: state.players,
-	    selection: state.form.players
-	  });
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    onUpdate: function onUpdate(index, value) {
-	      dispatch((0, _form.updatePlayer)(index, value));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_PlayerSelector2.default);
-
-/***/ },
+/* 280 */,
 /* 281 */
 /***/ function(module, exports) {
 
@@ -31115,45 +31096,7 @@
 	};
 
 /***/ },
-/* 282 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _reactRedux = __webpack_require__(175);
-	
-	var _form = __webpack_require__(281);
-	
-	var _CharacterSelector = __webpack_require__(277);
-	
-	var _CharacterSelector2 = _interopRequireDefault(_CharacterSelector);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  return _extends({}, ownProps, {
-	    characters: state.characters,
-	    players: state.form.players
-	  });
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    onUpdate: function onUpdate(index, value) {
-	      dispatch((0, _form.updateCharacter)(index, value));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_CharacterSelector2.default);
-
-/***/ },
+/* 282 */,
 /* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31236,6 +31179,56 @@
 	};
 	
 	exports.default = Option;
+
+/***/ },
+/* 285 */,
+/* 286 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _reactRedux = __webpack_require__(175);
+	
+	var _form = __webpack_require__(281);
+	
+	var _Player = __webpack_require__(275);
+	
+	var _Player2 = _interopRequireDefault(_Player);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return _extends({}, ownProps, {
+	    characters: state.characters,
+	    players: state.players,
+	    selection: {
+	      players: state.form.players,
+	      score: state.form.score
+	    }
+	  });
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onPlayerUpdate: function onPlayerUpdate(index, value) {
+	      dispatch((0, _form.updatePlayer)(index, value));
+	    },
+	    onCharacterUpdate: function onCharacterUpdate(index, value) {
+	      dispatch((0, _form.updateCharacter)(index, value));
+	    },
+	    onScoreUpdate: function onScoreUpdate(index, value) {
+	      dispatch((0, _form.updateScore)(index, value));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Player2.default);
 
 /***/ }
 /******/ ]);
