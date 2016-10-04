@@ -12,6 +12,8 @@ module.exports = {
   },
   rules: {
     'jsx-a11y/img-has-alt': 'off',
+    'react/forbid-prop-types': 'off',
     'no-underscore-dangle': 'off',
+    'react/prop-types': 'warn',
   },
 };

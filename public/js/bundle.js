@@ -30809,26 +30809,27 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _OptGroup = __webpack_require__(283);
+	
+	var _OptGroup2 = _interopRequireDefault(_OptGroup);
+	
+	var _Option = __webpack_require__(284);
+	
+	var _Option2 = _interopRequireDefault(_Option);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	var findCharById = function findCharById(characters, id) {
+	  return characters.find(function (c) {
+	    return id === c.id;
+	  });
+	};
 	
-	var renderOption = function renderOption(label, value, key) {
-	  var optProps = {
-	    key: key
-	  };
-	
-	  if (value === false) {
-	    optProps.disabled = true;
-	  } else {
-	    optProps.value = value;
+	var renderFavorites = function renderFavorites(favorites) {
+	  if (!favorites.length) {
+	    return null;
 	  }
-	
-	  return _react2.default.createElement(
-	    'option',
-	    optProps,
-	    label
-	  );
+	  return _react2.default.createElement(_OptGroup2.default, { label: 'Favorites', data: favorites });
 	};
 	
 	exports.default = function (_ref) {
@@ -30844,42 +30845,44 @@
 	    onUpdate(index, value);
 	  };
 	
-	  var mapCharacters = function mapCharacters(favorites) {
-	    return favorites.map(function (id) {
-	      var character = characters.find(function (c) {
-	        return c.id === id;
-	      });
-	      return [character.name, character.code];
+	  /* Shortcuts */
+	
+	  var favorites = [];
+	
+	  if (players[index]) {
+	    var ids = players[index].played_characters;
+	    favorites = ids.map(function (id) {
+	      var char = findCharById(characters, id);
+	      return {
+	        label: char.name,
+	        value: char.code
+	      };
 	    });
+	  }
+	
+	  /* All */
+	
+	  var renderAll = function renderAll() {
+	    var data = characters.map(function (char) {
+	      return {
+	        label: char.name,
+	        value: char.code
+	      };
+	    });
+	    return _react2.default.createElement(_OptGroup2.default, { label: 'All', data: data });
 	  };
 	
-	  var renderCharacterList = function renderCharacterList() {
-	    var schema = [['Choose character...', '']];
-	
-	    if (players[index]) {
-	      var favorites = players[index].played_characters;
-	
-	      if (favorites.length) {
-	        schema = schema.concat([['Favorites', false]].concat(_toConsumableArray(mapCharacters(favorites)), [['All', false]]));
-	      }
-	    }
-	
-	    schema = schema.concat(mapCharacters(characters.map(function (c) {
-	      return c.id;
-	    })));
-	
-	    return schema.map(function (data, i) {
-	      return renderOption(data[0], data[1], i);
-	    });
-	  };
+	  /* render() */
 	
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'component__CharacterSelector' },
 	    _react2.default.createElement(
 	      'select',
-	      { onChange: handleChange },
-	      renderCharacterList()
+	      { onChange: handleChange, value: '' },
+	      _react2.default.createElement(_Option2.default, { label: 'Choose character...' }),
+	      renderFavorites(favorites),
+	      renderAll()
 	    )
 	  );
 	};
@@ -31093,6 +31096,95 @@
 	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_CharacterSelector2.default);
+
+/***/ },
+/* 283 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Option = __webpack_require__(284);
+	
+	var _Option2 = _interopRequireDefault(_Option);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var renderOptions = function renderOptions(data) {
+	  return data.map(function (opt, i) {
+	    return _react2.default.createElement(_Option2.default, _extends({}, opt, { key: i }));
+	  });
+	};
+	
+	var OptGroup = function OptGroup(props) {
+	  return _react2.default.createElement(
+	    'optgroup',
+	    { label: props.label },
+	    renderOptions(props.data)
+	  );
+	};
+	
+	OptGroup.propTypes = {
+	  label: _react.PropTypes.string,
+	  data: _react.PropTypes.array
+	};
+	
+	exports.default = OptGroup;
+
+/***/ },
+/* 284 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Option = function Option(_ref) {
+	  var label = _ref.label;
+	  var value = _ref.value;
+	
+	  var prps = {
+	    value: value || ''
+	  };
+	
+	  return _react2.default.createElement(
+	    'option',
+	    prps,
+	    label
+	  );
+	};
+	
+	Option.propTypes = {
+	  label: _react.PropTypes.string.isRequired,
+	  value: _react.PropTypes.string
+	};
+	
+	exports.default = Option;
+	
+	/*
+	data: PropTypes.arrayOf(PropTypes.shape({
+	  label: PropTypes.string,
+	  value: PropTypes.string,
+	  disabled: PropTypes.bool,
+	})),
+	*/
 
 /***/ }
 /******/ ]);
