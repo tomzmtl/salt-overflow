@@ -31008,7 +31008,7 @@
 	ScoreSelector.propTypes = {
 	  index: _react.PropTypes.number,
 	  numbers: _react.PropTypes.arrayOf(_react.PropTypes.number),
-	  score: _react.PropTypes.arrayOf(_react.PropTypes.number),
+	  score: _react.PropTypes.number,
 	  onUpdate: _react.PropTypes.func
 	};
 	

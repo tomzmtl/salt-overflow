@@ -33,7 +33,7 @@ const ScoreSelector = ({ index, numbers, score, onUpdate }) => {
 ScoreSelector.propTypes = {
   index: PropTypes.number,
   numbers: PropTypes.arrayOf(PropTypes.number),
-  score: PropTypes.arrayOf(PropTypes.number),
+  score: PropTypes.number,
   onUpdate: PropTypes.func,
 };
 
