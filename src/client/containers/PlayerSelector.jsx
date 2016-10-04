@@ -5,6 +5,7 @@ import PlayerSelector from '../components/form/PlayerSelector';
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   players: state.players,
+  selection: state.form.players,
 });
 
 const mapDispatchToProps = dispatch => ({

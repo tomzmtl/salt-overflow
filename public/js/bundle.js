@@ -30754,24 +30754,19 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var renderOption = function renderOption(player, i) {
-	  return _react2.default.createElement(
-	    "option",
-	    { key: i, value: player.id },
-	    player.name
-	  );
-	};
-	
-	exports.default = function (_ref) {
+	var PlayerSelector = function PlayerSelector(_ref) {
 	  var index = _ref.index;
 	  var players = _ref.players;
 	  var onUpdate = _ref.onUpdate;
+	  var selection = _ref.selection;
 	
 	  var handleChange = function handleChange(e) {
 	    var value = players.find(function (c) {
@@ -30779,6 +30774,24 @@
 	    });
 	    onUpdate(index, value);
 	  };
+	
+	  var renderOption = function renderOption(player, i) {
+	    var altIndex = index === 0 ? 1 : 0;
+	    var prps = {};
+	
+	    if (selection[altIndex] && player.id === selection[altIndex].id) {
+	      prps.disabled = true;
+	    } else {
+	      prps.value = player.id;
+	    }
+	
+	    return _react2.default.createElement(
+	      "option",
+	      _extends({ key: i }, prps),
+	      player.name
+	    );
+	  };
+	
 	  return _react2.default.createElement(
 	    "div",
 	    { className: "component__PlayerSelector" },
@@ -30794,6 +30807,15 @@
 	    )
 	  );
 	};
+	
+	PlayerSelector.propTypes = {
+	  index: _react.PropTypes.number,
+	  players: _react.PropTypes.arrayOf(_react.PropTypes.object),
+	  onUpdate: _react.PropTypes.func,
+	  selection: _react.PropTypes.arrayOf(_react.PropTypes.object)
+	};
+	
+	exports.default = PlayerSelector;
 
 /***/ },
 /* 277 */
@@ -31038,7 +31060,8 @@
 	
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return _extends({}, ownProps, {
-	    players: state.players
+	    players: state.players,
+	    selection: state.form.players
 	  });
 	};
 	
