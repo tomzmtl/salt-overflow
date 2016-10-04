@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import OptGroup from '../core/OptGroup';
 import Option from '../core/Option';
 
@@ -14,7 +14,9 @@ const renderFavorites = (favorites) => {
 };
 
 
-export default ({ index, characters, players, onUpdate }) => {
+const CharacterSelector = ({ index, characters, players, onUpdate }) => {
+  /* Events */
+
   const handleChange = (e) => {
     const value = characters.find(c => c.code === e.target.value);
     onUpdate(index, value);
@@ -38,18 +40,27 @@ export default ({ index, characters, players, onUpdate }) => {
   /* All */
 
   const renderAll = () => {
-    const data = characters.map(char => ({
+    const all = characters.map(char => ({
       label: char.name,
       value: char.code,
     }));
-    return <OptGroup label="All" data={data} />;
+    if (favorites.length) {
+      return <OptGroup label="All" data={all} />;
+    }
+    return all.map((opt, i) => <Option {...opt} key={i} />);
   };
 
   /* render() */
 
+  // define selected value
+  let selection;
+  if (favorites.length) {
+    selection = favorites[0].value;
+  }
+
   return (
     <div className="component__CharacterSelector">
-      <select onChange={handleChange} value="">
+      <select onChange={handleChange} value={selection}>
         <Option label="Choose character..." />
         {renderFavorites(favorites)}
         {renderAll()}
@@ -57,3 +68,14 @@ export default ({ index, characters, players, onUpdate }) => {
     </div>
   );
 };
+
+
+CharacterSelector.propTypes = {
+  index: PropTypes.number,
+  characters: PropTypes.arrayOf(PropTypes.object),
+  players: PropTypes.arrayOf(PropTypes.object),
+  onUpdate: PropTypes.func,
+};
+
+
+export default CharacterSelector;

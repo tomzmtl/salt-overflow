@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 
-export default ({ index, numbers, score, onUpdate }) => {
+const ScoreSelector = ({ index, numbers, score, onUpdate }) => {
   const renderOption = (value, isActive) => {
     const optionProps = {
       key: value,
@@ -28,3 +28,14 @@ export default ({ index, numbers, score, onUpdate }) => {
     </div>
   );
 };
+
+
+ScoreSelector.propTypes = {
+  index: PropTypes.number,
+  numbers: PropTypes.arrayOf(PropTypes.number),
+  score: PropTypes.arrayOf(PropTypes.number),
+  onUpdate: PropTypes.func,
+};
+
+
+export default ScoreSelector;

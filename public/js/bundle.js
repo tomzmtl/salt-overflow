@@ -30805,6 +30805,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -30832,11 +30834,13 @@
 	  return _react2.default.createElement(_OptGroup2.default, { label: 'Favorites', data: favorites });
 	};
 	
-	exports.default = function (_ref) {
+	var CharacterSelector = function CharacterSelector(_ref) {
 	  var index = _ref.index;
 	  var characters = _ref.characters;
 	  var players = _ref.players;
 	  var onUpdate = _ref.onUpdate;
+	
+	  /* Events */
 	
 	  var handleChange = function handleChange(e) {
 	    var value = characters.find(function (c) {
@@ -30863,29 +30867,49 @@
 	  /* All */
 	
 	  var renderAll = function renderAll() {
-	    var data = characters.map(function (char) {
+	    var all = characters.map(function (char) {
 	      return {
 	        label: char.name,
 	        value: char.code
 	      };
 	    });
-	    return _react2.default.createElement(_OptGroup2.default, { label: 'All', data: data });
+	    if (favorites.length) {
+	      return _react2.default.createElement(_OptGroup2.default, { label: 'All', data: all });
+	    }
+	    return all.map(function (opt, i) {
+	      return _react2.default.createElement(_Option2.default, _extends({}, opt, { key: i }));
+	    });
 	  };
 	
 	  /* render() */
+	
+	  // define selected value
+	  var selection = void 0;
+	  if (favorites.length) {
+	    selection = favorites[0].value;
+	  }
 	
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'component__CharacterSelector' },
 	    _react2.default.createElement(
 	      'select',
-	      { onChange: handleChange, value: '' },
+	      { onChange: handleChange, value: selection },
 	      _react2.default.createElement(_Option2.default, { label: 'Choose character...' }),
 	      renderFavorites(favorites),
 	      renderAll()
 	    )
 	  );
 	};
+	
+	CharacterSelector.propTypes = {
+	  index: _react.PropTypes.number,
+	  characters: _react.PropTypes.arrayOf(_react.PropTypes.object),
+	  players: _react.PropTypes.arrayOf(_react.PropTypes.object),
+	  onUpdate: _react.PropTypes.func
+	};
+	
+	exports.default = CharacterSelector;
 
 /***/ },
 /* 278 */
@@ -30942,7 +30966,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function (_ref) {
+	var ScoreSelector = function ScoreSelector(_ref) {
 	  var index = _ref.index;
 	  var numbers = _ref.numbers;
 	  var score = _ref.score;
@@ -30980,6 +31004,15 @@
 	    })
 	  );
 	};
+	
+	ScoreSelector.propTypes = {
+	  index: _react.PropTypes.number,
+	  numbers: _react.PropTypes.arrayOf(_react.PropTypes.number),
+	  score: _react.PropTypes.arrayOf(_react.PropTypes.number),
+	  onUpdate: _react.PropTypes.func
+	};
+	
+	exports.default = ScoreSelector;
 
 /***/ },
 /* 280 */
