@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Option from '../core/Option';
 
 
 const PlayerSelector = ({ index, players, onUpdate, selection }) => {
@@ -18,9 +19,7 @@ const PlayerSelector = ({ index, players, onUpdate, selection }) => {
     }
 
     return (
-      <option key={i} {...prps}>
-        {player.name}
-      </option>
+      <Option label={player.name} key={i} {...prps} />
     );
   };
 

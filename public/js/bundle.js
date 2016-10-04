@@ -30748,7 +30748,7 @@
 /* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30759,6 +30759,10 @@
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _Option = __webpack_require__(284);
+	
+	var _Option2 = _interopRequireDefault(_Option);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30785,23 +30789,19 @@
 	      prps.value = player.id;
 	    }
 	
-	    return _react2.default.createElement(
-	      "option",
-	      _extends({ key: i }, prps),
-	      player.name
-	    );
+	    return _react2.default.createElement(_Option2.default, _extends({ label: player.name, key: i }, prps));
 	  };
 	
 	  return _react2.default.createElement(
-	    "div",
-	    { className: "component__PlayerSelector" },
+	    'div',
+	    { className: 'component__PlayerSelector' },
 	    _react2.default.createElement(
-	      "select",
+	      'select',
 	      { onChange: handleChange },
 	      _react2.default.createElement(
-	        "option",
-	        { value: "" },
-	        "Choose player..."
+	        'option',
+	        { value: '' },
+	        'Choose player...'
 	      ),
 	      players.map(renderOption)
 	    )
@@ -31215,9 +31215,11 @@
 	var Option = function Option(_ref) {
 	  var label = _ref.label;
 	  var value = _ref.value;
+	  var disabled = _ref.disabled;
 	
 	  var prps = {
-	    value: value || ''
+	    value: value || '',
+	    disabled: disabled || false
 	  };
 	
 	  return _react2.default.createElement(
@@ -31229,18 +31231,11 @@
 	
 	Option.propTypes = {
 	  label: _react.PropTypes.string.isRequired,
-	  value: _react.PropTypes.string
+	  value: _react.PropTypes.string,
+	  disabled: _react.PropTypes.bool
 	};
 	
 	exports.default = Option;
-	
-	/*
-	data: PropTypes.arrayOf(PropTypes.shape({
-	  label: PropTypes.string,
-	  value: PropTypes.string,
-	  disabled: PropTypes.bool,
-	})),
-	*/
 
 /***/ }
 /******/ ]);

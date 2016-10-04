@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 
 
-const Option = ({ label, value }) => {
+const Option = ({ label, value, disabled }) => {
   const prps = {
     value: value || '',
+    disabled: disabled || false,
   };
 
   return (
@@ -14,16 +15,8 @@ const Option = ({ label, value }) => {
 Option.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 
 export default Option;
-
-
-/*
-data: PropTypes.arrayOf(PropTypes.shape({
-  label: PropTypes.string,
-  value: PropTypes.string,
-  disabled: PropTypes.bool,
-})),
-*/
