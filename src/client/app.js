@@ -13,7 +13,7 @@ import initialStore from './store';
 import { fetchDashboardData } from './actions/actions';
 
 import Dashboard from './containers/Dashboard';
-import AddGameForm from './components/form/AddGameForm';
+import AddGameForm from './containers/AddGameForm';
 
 import '../scss/app.scss';
 

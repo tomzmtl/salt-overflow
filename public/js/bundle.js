@@ -91,7 +91,7 @@
 	
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
 	
-	var _AddGameForm = __webpack_require__(273);
+	var _AddGameForm = __webpack_require__(284);
 	
 	var _AddGameForm2 = _interopRequireDefault(_AddGameForm);
 	
@@ -30329,7 +30329,6 @@
 	
 	        var favorites = (0, _helpers.mapFavorites)(action.player, _characters3.default);
 	        var characters = [].concat(_toConsumableArray(form.characters));
-	
 	        if (favorites.length) {
 	          characters[action.index] = favorites[0];
 	        } else {
@@ -30345,6 +30344,7 @@
 	      {
 	        var _characters = [].concat(_toConsumableArray(form.characters));
 	        _characters[action.index] = action.character;
+	        console.log(action);
 	
 	        return _extends({}, form, {
 	          characters: _characters
@@ -30754,7 +30754,34 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function () {
+	var renderSubmitButton = function renderSubmitButton(isValid) {
+	  if (!isValid) {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      'Submit'
+	    );
+	  }
+	
+	  return _react2.default.createElement(
+	    'button',
+	    { className: 'btn' },
+	    'Submit'
+	  );
+	};
+	
+	var AddGameForm = function AddGameForm(_ref) {
+	  var players = _ref.players;
+	  var characters = _ref.characters;
+	  var score = _ref.score;
+	
+	  var isValid = function isValid() {
+	    if ([players[0], players[1], characters[0], characters[1], score[0], score[1]].includes(null)) {
+	      return false;
+	    }
+	    return players[0].id !== players[1].id && score[0] !== score[1];
+	  };
+	
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'component__AddGameForm block' },
@@ -30764,13 +30791,17 @@
 	      _react2.default.createElement(_Player2.default, { index: 0 }),
 	      _react2.default.createElement(_Player2.default, { index: 1 })
 	    ),
-	    _react2.default.createElement(
-	      'button',
-	      { className: 'btn' },
-	      'Submit'
-	    )
+	    renderSubmitButton(isValid())
 	  );
 	};
+	
+	AddGameForm.propTypes = {
+	  players: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	  characters: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	  score: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired
+	};
+	
+	exports.default = AddGameForm;
 
 /***/ },
 /* 274 */
@@ -30911,11 +30942,10 @@
 	  });
 	
 	  // character selector
-	  var selectedCharacter = props.selection.characters[props.index];
 	  var characterSelectorProps = _extends({}, base, {
 	    characters: [],
 	    favorites: [],
-	    selected: selectedCharacter ? selectedCharacter.code : null,
+	    selected: null,
 	    players: props.selection.players,
 	    onUpdate: props.onCharacterUpdate
 	  });
@@ -30923,11 +30953,14 @@
 	  var selectedPlayer = props.selection.players[props.index];
 	  if (selectedPlayer) {
 	    var favorites = (0, _helpers.mapFavorites)(selectedPlayer, _characters2.default);
-	    characterSelectorProps.disable = false;
-	    characterSelectorProps.characters = _characters2.default;
 	    if (favorites.length) {
 	      characterSelectorProps.favorites = favorites;
-	      characterSelectorProps.selected = props.selection.characters[props.index].code;
+	    }
+	    characterSelectorProps.disable = false;
+	    characterSelectorProps.characters = _characters2.default;
+	    var selectedCharacter = props.selection.characters[props.index];
+	    if (selectedCharacter !== null) {
+	      characterSelectorProps.selected = selectedCharacter.code;
 	    }
 	  }
 	
@@ -31130,7 +31163,7 @@
 	    var value = characters.find(function (c) {
 	      return c.code === e.target.value;
 	    });
-	    onUpdate(index, value);
+	    onUpdate(index, value || null);
 	  };
 	
 	  /* Shortcuts */
@@ -31344,6 +31377,50 @@
 	};
 	
 	exports.default = CharacterIcon;
+
+/***/ },
+/* 284 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(175);
+	
+	var _form = __webpack_require__(275);
+	
+	var _AddGameForm = __webpack_require__(273);
+	
+	var _AddGameForm2 = _interopRequireDefault(_AddGameForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    characters: state.form.characters,
+	    players: state.form.players,
+	    score: state.form.score
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onPlayerUpdate: function onPlayerUpdate(index, value) {
+	      dispatch((0, _form.updatePlayer)(index, value));
+	    },
+	    onCharacterUpdate: function onCharacterUpdate(index, value) {
+	      dispatch((0, _form.updateCharacter)(index, value));
+	    },
+	    onScoreUpdate: function onScoreUpdate(index, value) {
+	      dispatch((0, _form.updateScore)(index, value));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_AddGameForm2.default);
 
 /***/ }
 /******/ ]);

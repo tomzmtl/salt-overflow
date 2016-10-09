@@ -21,12 +21,11 @@ const Player = (props) => {
   };
 
   // character selector
-  const selectedCharacter = props.selection.characters[props.index];
   const characterSelectorProps = {
     ...base,
     characters: [],
     favorites: [],
-    selected: selectedCharacter ? selectedCharacter.code : null,
+    selected: null,
     players: props.selection.players,
     onUpdate: props.onCharacterUpdate,
   };
@@ -34,11 +33,14 @@ const Player = (props) => {
   const selectedPlayer = props.selection.players[props.index];
   if (selectedPlayer) {
     const favorites = mapFavorites(selectedPlayer, Characters);
-    characterSelectorProps.disable = false;
-    characterSelectorProps.characters = Characters;
     if (favorites.length) {
       characterSelectorProps.favorites = favorites;
-      characterSelectorProps.selected = props.selection.characters[props.index].code;
+    }
+    characterSelectorProps.disable = false;
+    characterSelectorProps.characters = Characters;
+    const selectedCharacter = props.selection.characters[props.index];
+    if (selectedCharacter !== null) {
+      characterSelectorProps.selected = selectedCharacter.code;
     }
   }
 

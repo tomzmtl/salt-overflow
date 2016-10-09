@@ -13,7 +13,7 @@ const CharacterSelector = ({ index, characters, favorites, onUpdate, selected })
 
   const handleChange = (e) => {
     const value = characters.find(c => c.code === e.target.value);
-    onUpdate(index, value);
+    onUpdate(index, value || null);
   };
 
   /* Shortcuts */
