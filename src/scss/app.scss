@@ -13,7 +13,9 @@ $theme_primary: #f59214;
 @import 'form';
 @import 'button';
 
-@import 'components/SaltyMeter';
-@import 'components/LatestResults';
 @import 'components/AddGameForm';
+@import 'components/CharacterIcon';
+@import 'components/CharacterSelector';
+@import 'components/LatestResults';
 @import 'components/NumberSelector';
+@import 'components/SaltyMeter';

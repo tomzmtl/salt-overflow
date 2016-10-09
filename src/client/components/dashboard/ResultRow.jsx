@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import CharacterIcon from '../core/CharacterIcon';
 
 
 const ResultRow = ({ players, score, characters, winner }) => {
@@ -6,7 +7,7 @@ const ResultRow = ({ players, score, characters, winner }) => {
     <div className={`player p${index + 1} ${index === winner ? 'winner' : 'loser'}`} key={index}>
       <div className="name">{name}</div>
       <div className="icon">
-        <img src={`public/images/characters/small/${characters[index].code}.png`} />
+        <CharacterIcon code={characters[index].code} />
       </div>
       <div className="score">{score[index]}</div>
     </div>

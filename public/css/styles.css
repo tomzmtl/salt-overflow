@@ -426,26 +426,35 @@ select, .component__NumberSelector {
   .btn:hover {
     background: #e6850a; }
 
-.component__SaltyMeter ul {
-  margin: 0;
-  padding: 0;
-  max-width: 300px;
-  list-style-type: none; }
+.component__AddGameForm {
+  display: block; }
+  .component__AddGameForm .fields {
+    max-width: 500px; }
+  .component__AddGameForm .btn {
+    margin-top: 35px; }
 
-.component__SaltyMeter li {
-  display: flex;
-  background: #F7F7F7; }
-  .component__SaltyMeter li:nth-child(even) {
-    background: #FCFCFC; }
-  .component__SaltyMeter li > div {
-    padding: 5px; }
+@media (max-width: 520px) {
+  .component__Player:first-child {
+    margin-bottom: 40px; } }
 
-.component__SaltyMeter .name {
-  width: 70%; }
+@media (min-width: 520px) {
+  .component__AddGameForm .fields {
+    display: flex; }
+    .component__AddGameForm .fields > div {
+      width: 50%; }
+  .component__Player:first-child {
+    margin-right: 30px; } }
 
-.component__SaltyMeter .score {
-  width: 30%;
-  font-weight: 700; }
+.component__CharacterIcon {
+  width: 32px;
+  height: 32px; }
+
+.component__CharacterSelector {
+  position: relative; }
+  .component__CharacterSelector .component__CharacterIcon {
+    position: absolute;
+    top: 4px;
+    right: 4px; }
 
 .component__LatestResults ul {
   display: flex;
@@ -464,9 +473,6 @@ select, .component__NumberSelector {
     padding: 5px; }
   .component__LatestResults li .player {
     width: 50%; }
-  .component__LatestResults li .icon > img {
-    width: 32px;
-    height: 32px; }
   .component__LatestResults li .name {
     font-size: 0.8em; }
     .component__LatestResults li .name.p1 {
@@ -479,7 +485,7 @@ select, .component__NumberSelector {
   .component__LatestResults li .player.winner .name {
     font-weight: 700;
     color: #f59214; }
-  .component__LatestResults li .player.loser .icon {
+  .component__LatestResults li .player.loser .component__CharacterIcon {
     opacity: 0.5; }
 
 @media (max-width: 579px) {
@@ -506,25 +512,6 @@ select, .component__NumberSelector {
     .component__LatestResults li:nth-child(4n+4) {
       margin-right: 0; } }
 
-.component__AddGameForm {
-  display: block; }
-  .component__AddGameForm .fields {
-    max-width: 500px; }
-  .component__AddGameForm .btn {
-    margin-top: 35px; }
-
-@media (max-width: 520px) {
-  .component__Player:first-child {
-    margin-bottom: 40px; } }
-
-@media (min-width: 520px) {
-  .component__AddGameForm .fields {
-    display: flex; }
-    .component__AddGameForm .fields > div {
-      width: 50%; }
-  .component__Player:first-child {
-    margin-right: 30px; } }
-
 .component__NumberSelector {
   display: flex;
   padding: 6px; }
@@ -545,5 +532,26 @@ select, .component__NumberSelector {
       font-weight: bold; }
     .component__NumberSelector div:last-child {
       margin-right: 0; }
+
+.component__SaltyMeter ul {
+  margin: 0;
+  padding: 0;
+  max-width: 300px;
+  list-style-type: none; }
+
+.component__SaltyMeter li {
+  display: flex;
+  background: #F7F7F7; }
+  .component__SaltyMeter li:nth-child(even) {
+    background: #FCFCFC; }
+  .component__SaltyMeter li > div {
+    padding: 5px; }
+
+.component__SaltyMeter .name {
+  width: 70%; }
+
+.component__SaltyMeter .score {
+  width: 30%;
+  font-weight: 700; }
 
 /*# sourceMappingURL=styles.css.map*/

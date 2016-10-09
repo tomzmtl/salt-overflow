@@ -30683,6 +30683,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _CharacterIcon = __webpack_require__(283);
+	
+	var _CharacterIcon2 = _interopRequireDefault(_CharacterIcon);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var ResultRow = function ResultRow(_ref) {
@@ -30704,7 +30708,7 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'icon' },
-	        _react2.default.createElement('img', { src: 'public/images/characters/small/' + characters[index].code + '.png' })
+	        _react2.default.createElement(_CharacterIcon2.default, { code: characters[index].code })
 	      ),
 	      _react2.default.createElement(
 	        'div',
@@ -30907,10 +30911,11 @@
 	  });
 	
 	  // character selector
+	  var selectedCharacter = props.selection.characters[props.index];
 	  var characterSelectorProps = _extends({}, base, {
 	    characters: [],
 	    favorites: [],
-	    selected: '',
+	    selected: selectedCharacter ? selectedCharacter.code : null,
 	    players: props.selection.players,
 	    onUpdate: props.onCharacterUpdate
 	  });
@@ -31102,6 +31107,10 @@
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
+	var _CharacterIcon = __webpack_require__(283);
+	
+	var _CharacterIcon2 = _interopRequireDefault(_CharacterIcon);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var CharacterSelector = function CharacterSelector(_ref) {
@@ -31165,7 +31174,7 @@
 	  };
 	
 	  if (selected) {
-	    selectProps.value = selected;
+	    selectProps.value = selected || '';
 	  }
 	
 	  return _react2.default.createElement(
@@ -31177,7 +31186,8 @@
 	      _react2.default.createElement(_Option2.default, { label: 'Choose character...' }),
 	      renderFavorites(favorites),
 	      renderAll()
-	    )
+	    ),
+	    _react2.default.createElement(_CharacterIcon2.default, { code: selected })
 	  );
 	};
 	
@@ -31297,6 +31307,43 @@
 	};
 	
 	exports.default = ScoreSelector;
+
+/***/ },
+/* 283 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CharacterIcon = function CharacterIcon(_ref) {
+	  var code = _ref.code;
+	
+	  if (code === null) {
+	    return null;
+	  }
+	
+	  var imgProps = {
+	    className: 'component__CharacterIcon',
+	    src: 'public/images/characters/small/' + code + '.png'
+	  };
+	
+	  return _react2.default.createElement('img', imgProps);
+	};
+	
+	CharacterIcon.propTypes = {
+	  code: _react.PropTypes.string
+	};
+	
+	exports.default = CharacterIcon;
 
 /***/ }
 /******/ ]);

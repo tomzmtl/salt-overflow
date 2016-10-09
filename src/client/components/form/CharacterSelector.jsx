@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import OptGroup from '../core/OptGroup';
 import Option from '../core/Option';
+import CharacterIcon from '../core/CharacterIcon';
 
 
 const CharacterSelector = ({ index, characters, favorites, onUpdate, selected }) => {
@@ -50,7 +51,7 @@ const CharacterSelector = ({ index, characters, favorites, onUpdate, selected })
   };
 
   if (selected) {
-    selectProps.value = selected;
+    selectProps.value = selected || '';
   }
 
   return (
@@ -60,6 +61,7 @@ const CharacterSelector = ({ index, characters, favorites, onUpdate, selected })
         {renderFavorites(favorites)}
         {renderAll()}
       </select>
+      <CharacterIcon code={selected} />
     </div>
   );
 };

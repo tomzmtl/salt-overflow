@@ -21,11 +21,12 @@ const Player = (props) => {
   };
 
   // character selector
+  const selectedCharacter = props.selection.characters[props.index];
   const characterSelectorProps = {
     ...base,
     characters: [],
     favorites: [],
-    selected: '',
+    selected: selectedCharacter ? selectedCharacter.code : null,
     players: props.selection.players,
     onUpdate: props.onCharacterUpdate,
   };
