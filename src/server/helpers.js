@@ -1,6 +1,6 @@
 import pick from 'lodash.pick';
 import omit from 'lodash.omit';
-import characters from './constants/characters';
+import characters from '../shared/characters';
 
 
 export default null;

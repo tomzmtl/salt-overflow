@@ -1,26 +1,98 @@
+import { expect } from 'chai';
 import reducer from '../../reducers/app';
 import { testReducer } from '../utils';
 
 
 describe('Reducers (form)', () => {
   it('Updates player selection', () => {
-    testReducer(reducer,
+    const characters = [
       {
+        code: 'shk',
+        name: 'Sheik',
+        id: 11,
+      },
+      {
+        code: 'jig',
+        name: 'Jigglypuff',
+        id: 22,
+      },
+    ];
+
+    const player = {
+      id: 5,
+    };
+
+    const result = reducer(
+      {
+        characters,
         form: {
+          characters: [null, null],
           players: [null, null],
         },
       },
       {
         type: 'UPDATE_PLAYER',
         index: 0,
-        player: 5,
-      },
+        player,
+      });
+
+    expect(result.form.players).to.deep.equal([player, null]);
+  });
+
+  it('Auto-selects character if favorites are available', () => {
+    const favorite = {
+      code: 'jig',
+      name: 'Jigglypuff',
+      id: 22,
+    };
+
+    const player = {
+      id: 5,
+      played_characters: [22, 11],
+    };
+
+    const result = reducer(
       {
         form: {
-          players: [5, null],
+          characters: [null, null],
+          players: [null, null],
         },
-      }
-    );
+      },
+      {
+        type: 'UPDATE_PLAYER',
+        index: 0,
+        player,
+      });
+
+    expect(result.form.characters).to.deep.equal([favorite, null]);
+  });
+
+  it('Unselects character if favorites are not available', () => {
+    const favorite = {
+      code: 'jig',
+      name: 'Jigglypuff',
+      id: 22,
+    };
+
+    const player = {
+      id: 5,
+      played_characters: [],
+    };
+
+    const result = reducer(
+      {
+        form: {
+          characters: [favorite, null],
+          players: [3, null],
+        },
+      },
+      {
+        type: 'UPDATE_PLAYER',
+        index: 0,
+        player,
+      });
+
+    expect(result.form.characters).to.deep.equal([null, null]);
   });
 
   it('Updates character selection', () => {

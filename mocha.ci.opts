@@ -1,3 +1,2 @@
 src/**/test/**/*.spec.js
 --require babel-register
---require expectations

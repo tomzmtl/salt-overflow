@@ -95,7 +95,7 @@
 	
 	var _AddGameForm2 = _interopRequireDefault(_AddGameForm);
 	
-	__webpack_require__(274);
+	__webpack_require__(277);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -16091,7 +16091,8 @@
 	  if (x === y) {
 	    // Steps 1-5, 7-10
 	    // Steps 6.b-6.e: +0 != -0
-	    return x !== 0 || 1 / x === 1 / y;
+	    // Added the nonzero y check to make Flow happy, but it is redundant
+	    return x !== 0 || y !== 0 || 1 / x === 1 / y;
 	  } else {
 	    // Step 6.a: NaN == NaN
 	    return x !== x && y !== y;
@@ -30262,7 +30263,7 @@
 	// import players from './players';
 	
 	
-	var _form = __webpack_require__(265);
+	var _form = __webpack_require__(263);
 	
 	var _form2 = _interopRequireDefault(_form);
 	
@@ -30293,10 +30294,8 @@
 	};
 
 /***/ },
-/* 263 */,
-/* 264 */,
-/* 265 */
-/***/ function(module, exports) {
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -30305,6 +30304,14 @@
 	});
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _characters2 = __webpack_require__(264);
+	
+	var _characters3 = _interopRequireDefault(_characters2);
+	
+	var _helpers = __webpack_require__(265);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -30316,18 +30323,31 @@
 	        var players = [].concat(_toConsumableArray(form.players));
 	        players[action.index] = action.player;
 	
-	        return _extends({}, form, {
+	        var updated = _extends({}, form, {
 	          players: players
 	        });
+	
+	        var favorites = (0, _helpers.mapFavorites)(action.player, _characters3.default);
+	        var characters = [].concat(_toConsumableArray(form.characters));
+	
+	        if (favorites.length) {
+	          characters[action.index] = favorites[0];
+	        } else {
+	          characters[action.index] = null;
+	        }
+	
+	        updated.characters = characters;
+	
+	        return updated;
 	      }
 	
 	    case 'UPDATE_CHARACTER':
 	      {
-	        var characters = [].concat(_toConsumableArray(form.characters));
-	        characters[action.index] = action.character;
+	        var _characters = [].concat(_toConsumableArray(form.characters));
+	        _characters[action.index] = action.character;
 	
 	        return _extends({}, form, {
-	          characters: characters
+	          characters: _characters
 	        });
 	      }
 	
@@ -30352,6 +30372,50 @@
 	    default:
 	      return form;
 	  }
+	};
+
+/***/ },
+/* 264 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = [[55, 'bay', 'Bayonetta'], [4, 'bow', 'Bowser'], [39, 'bjr', 'Bowser Jr.'], [26, 'cfc', 'Captain Falcon'], [24, 'chz', 'Charizard'], [54, 'cld', 'Cloud'], [43, 'cor', 'Corrin'], [45, 'dkp', 'Dark Pit'], [8, 'ddk', 'Diddy Kong'], [7, 'dkk', 'Donkey Kong'], [50, 'dkh', 'Duck Hunt'], [5, 'drm', 'Dr. Mario'], [20, 'fal', 'Falco'], [19, 'fox', 'Fox'], [12, 'gan', 'Ganondorf'], [40, 'gre', 'Greninja'], [31, 'ike', 'Ike'], [22, 'jig', 'Jigglypuff'], [18, 'ddd', 'King Dedede'], [16, 'kby', 'Kirby'], [9, 'lnk', 'Link'], [47, 'lmc', 'Little Mac'], // 0.3
+	[25, 'lcr', 'Lucario'], [28, 'luc', 'Lucas'], [42, 'lcn', 'Lucina'], // 0.4
+	[2, 'lui', 'Luigi'], [1, 'mar', 'Mario'], [29, 'mth', 'Marth'], [51, 'mgm', 'Mega Man'], [17, 'mtk', 'Meta Knight'], // 0.7
+	[23, 'mew', 'Mewtwo'], [32, 'mgw', 'Mr. Game & Watch'], [27, 'nes', 'Ness'], [35, 'oli', 'Olimar'], [52, 'pac', 'Pac-Man'], [44, 'pal', 'Palutena'], [3, 'pea', 'Peach'], [21, 'pik', 'Pikachu'], [32, 'pit', 'Pit'], [36, 'rob', 'R.O.B.'], // 0.6
+	[41, 'rbn', 'Robin'], [38, 'rsl', 'Rosalina & Luma'], [30, 'roy', 'Roy'], [53, 'ryu', 'Ryu'], [14, 'sam', 'Samus'], [37, 'son', 'Sonic'], [11, 'shk', 'Sheik'], [49, 'shu', 'Shulk'], [13, 'tlk', 'Toon Link'], [46, 'vil', 'Villager'], [34, 'war', 'Wario'], // 0.5
+	[48, 'wft', 'Wii Fit Trainer'], [6, 'yos', 'Yoshi'], [10, 'zel', 'Zelda'], [15, 'zss', 'Zero Suit Samus']].map(function (char) {
+	    return {
+	        id: char[0],
+	        code: char[1],
+	        name: char[2]
+	    };
+	});
+
+/***/ },
+/* 265 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = null;
+	var mapFavorites = exports.mapFavorites = function mapFavorites(player, characters) {
+	  var ids = 'played_characters' in player ? player.played_characters : [];
+	  if (ids.length === 0) {
+	    return ids;
+	  }
+	  return ids.map(function (id) {
+	    return characters.find(function (c) {
+	      return id === c.id;
+	    });
+	  });
 	};
 
 /***/ },
@@ -30680,7 +30744,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Player = __webpack_require__(286);
+	var _Player = __webpack_require__(274);
 	
 	var _Player2 = _interopRequireDefault(_Player);
 	
@@ -30706,12 +30770,6 @@
 
 /***/ },
 /* 274 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30720,21 +30778,118 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _reactRedux = __webpack_require__(175);
+	
+	var _form = __webpack_require__(275);
+	
+	var _Player = __webpack_require__(276);
+	
+	var _Player2 = _interopRequireDefault(_Player);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state, ownProps) {
+	  return _extends({}, ownProps, {
+	    characters: state.characters,
+	    players: state.players,
+	    selection: {
+	      characters: state.form.characters,
+	      players: state.form.players,
+	      score: state.form.score
+	    }
+	  });
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onPlayerUpdate: function onPlayerUpdate(index, value) {
+	      dispatch((0, _form.updatePlayer)(index, value));
+	    },
+	    onCharacterUpdate: function onCharacterUpdate(index, value) {
+	      dispatch((0, _form.updateCharacter)(index, value));
+	    },
+	    onScoreUpdate: function onScoreUpdate(index, value) {
+	      dispatch((0, _form.updateScore)(index, value));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Player2.default);
+
+/***/ },
+/* 275 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var updateScore = exports.updateScore = function updateScore(index, value) {
+	  return function (dispatch) {
+	    return dispatch({
+	      type: 'UPDATE_SCORE',
+	      index: index,
+	      score: value
+	    });
+	  };
+	};
+	
+	var updatePlayer = exports.updatePlayer = function updatePlayer(index, value) {
+	  return function (dispatch) {
+	    return dispatch({
+	      type: 'UPDATE_PLAYER',
+	      index: index,
+	      player: value
+	    });
+	  };
+	};
+	
+	var updateCharacter = exports.updateCharacter = function updateCharacter(index, value) {
+	  return function (dispatch) {
+	    return dispatch({
+	      type: 'UPDATE_CHARACTER',
+	      index: index,
+	      character: value
+	    });
+	  };
+	};
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(2);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PlayerSelector = __webpack_require__(276);
+	var _PlayerSelector = __webpack_require__(278);
 	
 	var _PlayerSelector2 = _interopRequireDefault(_PlayerSelector);
 	
-	var _CharacterSelector = __webpack_require__(277);
+	var _CharacterSelector = __webpack_require__(280);
 	
 	var _CharacterSelector2 = _interopRequireDefault(_CharacterSelector);
 	
-	var _ScoreSelector = __webpack_require__(279);
+	var _ScoreSelector = __webpack_require__(282);
 	
 	var _ScoreSelector2 = _interopRequireDefault(_ScoreSelector);
+	
+	var _characters = __webpack_require__(264);
+	
+	var _characters2 = _interopRequireDefault(_characters);
+	
+	var _helpers = __webpack_require__(265);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30745,22 +30900,30 @@
 	  };
 	
 	  // player selector
-	  var playerSelectorProps = Object.assign({}, base, {
+	  var playerSelectorProps = _extends({}, base, {
 	    players: props.players,
 	    selection: props.selection.players,
 	    onUpdate: props.onPlayerUpdate
 	  });
 	
 	  // character selector
-	  var characterSelectorProps = Object.assign({}, base, {
-	    characters: props.characters,
+	  var characterSelectorProps = _extends({}, base, {
+	    characters: [],
+	    favorites: [],
+	    selected: '',
 	    players: props.selection.players,
-	    onUpdate: props.onCharacterUpdate,
-	    disable: true
+	    onUpdate: props.onCharacterUpdate
 	  });
 	
-	  if (props.selection.players[props.index]) {
+	  var selectedPlayer = props.selection.players[props.index];
+	  if (selectedPlayer) {
+	    var favorites = (0, _helpers.mapFavorites)(selectedPlayer, _characters2.default);
 	    characterSelectorProps.disable = false;
+	    characterSelectorProps.characters = _characters2.default;
+	    if (favorites.length) {
+	      characterSelectorProps.favorites = favorites;
+	      characterSelectorProps.selected = props.selection.characters[props.index].code;
+	    }
 	  }
 	
 	  // score selector
@@ -30783,12 +30946,12 @@
 	Player.propTypes = {
 	  index: _react.PropTypes.number,
 	  players: _react.PropTypes.arrayOf(_react.PropTypes.object),
-	  characters: _react.PropTypes.arrayOf(_react.PropTypes.object),
 	  onPlayerUpdate: _react.PropTypes.func,
 	  onCharacterUpdate: _react.PropTypes.func,
 	  onScoreUpdate: _react.PropTypes.func,
 	  selection: _react.PropTypes.shape({
 	    players: _react.PropTypes.arrayOf(_react.PropTypes.object),
+	    characters: _react.PropTypes.arrayOf(_react.PropTypes.object),
 	    score: _react.PropTypes.arrayOf(_react.PropTypes.number)
 	  })
 	};
@@ -30796,7 +30959,13 @@
 	exports.default = Player;
 
 /***/ },
-/* 276 */
+/* 277 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30811,7 +30980,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Option = __webpack_require__(284);
+	var _Option = __webpack_require__(279);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
@@ -30869,7 +31038,48 @@
 	exports.default = PlayerSelector;
 
 /***/ },
-/* 277 */
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Option = function Option(_ref) {
+	  var label = _ref.label;
+	  var value = _ref.value;
+	  var disabled = _ref.disabled;
+	
+	  var prps = {
+	    value: value || '',
+	    disabled: disabled || false
+	  };
+	
+	  return _react2.default.createElement(
+	    'option',
+	    prps,
+	    label
+	  );
+	};
+	
+	Option.propTypes = {
+	  label: _react.PropTypes.string.isRequired,
+	  value: _react.PropTypes.string,
+	  disabled: _react.PropTypes.bool
+	};
+	
+	exports.default = Option;
+
+/***/ },
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30884,30 +31094,24 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _OptGroup = __webpack_require__(283);
+	var _OptGroup = __webpack_require__(281);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
-	var _Option = __webpack_require__(284);
+	var _Option = __webpack_require__(279);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var findCharById = function findCharById(characters, id) {
-	  return characters.find(function (c) {
-	    return id === c.id;
-	  });
-	};
-	
 	var CharacterSelector = function CharacterSelector(_ref) {
 	  var index = _ref.index;
 	  var characters = _ref.characters;
-	  var players = _ref.players;
+	  var favorites = _ref.favorites;
 	  var onUpdate = _ref.onUpdate;
-	  var disable = _ref.disable;
+	  var selected = _ref.selected;
 	
-	  if (disable) {
+	  if (!characters.length) {
 	    return _react2.default.createElement('input', { disabled: 'true', placeholder: 'Choose character...' });
 	  }
 	
@@ -30922,24 +31126,18 @@
 	
 	  /* Shortcuts */
 	
-	  var favorites = [];
-	
-	  if (players[index]) {
-	    var ids = players[index].played_characters;
-	    favorites = ids.map(function (id) {
-	      var char = findCharById(characters, id);
-	      return {
-	        label: char.name,
-	        value: char.code
-	      };
-	    });
-	  }
-	
 	  var renderFavorites = function renderFavorites() {
 	    if (!favorites.length) {
 	      return null;
 	    }
-	    return _react2.default.createElement(_OptGroup2.default, { label: 'Favorites', data: favorites });
+	    var favs = favorites.map(function (fav) {
+	      return {
+	        id: fav.id,
+	        label: fav.name,
+	        value: fav.code
+	      };
+	    });
+	    return _react2.default.createElement(_OptGroup2.default, { label: 'Favorites', data: favs });
 	  };
 	
 	  /* All */
@@ -30961,10 +31159,13 @@
 	
 	  /* render() */
 	
-	  // define selected value
-	  var selection = void 0;
-	  if (favorites.length) {
-	    selection = favorites[0].value;
+	  // set select props
+	  var selectProps = {
+	    onChange: handleChange
+	  };
+	
+	  if (selected) {
+	    selectProps.value = selected;
 	  }
 	
 	  return _react2.default.createElement(
@@ -30972,7 +31173,7 @@
 	    { className: 'component__CharacterSelector' },
 	    _react2.default.createElement(
 	      'select',
-	      { onChange: handleChange, value: selection },
+	      selectProps,
 	      _react2.default.createElement(_Option2.default, { label: 'Choose character...' }),
 	      renderFavorites(favorites),
 	      renderAll()
@@ -30983,16 +31184,58 @@
 	CharacterSelector.propTypes = {
 	  index: _react.PropTypes.number,
 	  characters: _react.PropTypes.arrayOf(_react.PropTypes.object),
-	  players: _react.PropTypes.arrayOf(_react.PropTypes.object),
-	  disable: _react.PropTypes.bool,
+	  favorites: _react.PropTypes.arrayOf(_react.PropTypes.object),
+	  selected: _react.PropTypes.string,
 	  onUpdate: _react.PropTypes.func
 	};
 	
 	exports.default = CharacterSelector;
 
 /***/ },
-/* 278 */,
-/* 279 */
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Option = __webpack_require__(279);
+	
+	var _Option2 = _interopRequireDefault(_Option);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var renderOptions = function renderOptions(data) {
+	  return data.map(function (opt, i) {
+	    return _react2.default.createElement(_Option2.default, _extends({}, opt, { key: i }));
+	  });
+	};
+	
+	var OptGroup = function OptGroup(props) {
+	  return _react2.default.createElement(
+	    'optgroup',
+	    { label: props.label },
+	    renderOptions(props.data)
+	  );
+	};
+	
+	OptGroup.propTypes = {
+	  label: _react.PropTypes.string,
+	  data: _react.PropTypes.array
+	};
+	
+	exports.default = OptGroup;
+
+/***/ },
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31054,181 +31297,6 @@
 	};
 	
 	exports.default = ScoreSelector;
-
-/***/ },
-/* 280 */,
-/* 281 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var updateScore = exports.updateScore = function updateScore(index, value) {
-	  return function (dispatch) {
-	    return dispatch({
-	      type: 'UPDATE_SCORE',
-	      index: index,
-	      score: value
-	    });
-	  };
-	};
-	
-	var updatePlayer = exports.updatePlayer = function updatePlayer(index, value) {
-	  return function (dispatch) {
-	    return dispatch({
-	      type: 'UPDATE_PLAYER',
-	      index: index,
-	      player: value
-	    });
-	  };
-	};
-	
-	var updateCharacter = exports.updateCharacter = function updateCharacter(index, value) {
-	  return function (dispatch) {
-	    return dispatch({
-	      type: 'UPDATE_CHARACTER',
-	      index: index,
-	      character: value
-	    });
-	  };
-	};
-
-/***/ },
-/* 282 */,
-/* 283 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Option = __webpack_require__(284);
-	
-	var _Option2 = _interopRequireDefault(_Option);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var renderOptions = function renderOptions(data) {
-	  return data.map(function (opt, i) {
-	    return _react2.default.createElement(_Option2.default, _extends({}, opt, { key: i }));
-	  });
-	};
-	
-	var OptGroup = function OptGroup(props) {
-	  return _react2.default.createElement(
-	    'optgroup',
-	    { label: props.label },
-	    renderOptions(props.data)
-	  );
-	};
-	
-	OptGroup.propTypes = {
-	  label: _react.PropTypes.string,
-	  data: _react.PropTypes.array
-	};
-	
-	exports.default = OptGroup;
-
-/***/ },
-/* 284 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Option = function Option(_ref) {
-	  var label = _ref.label;
-	  var value = _ref.value;
-	  var disabled = _ref.disabled;
-	
-	  var prps = {
-	    value: value || '',
-	    disabled: disabled || false
-	  };
-	
-	  return _react2.default.createElement(
-	    'option',
-	    prps,
-	    label
-	  );
-	};
-	
-	Option.propTypes = {
-	  label: _react.PropTypes.string.isRequired,
-	  value: _react.PropTypes.string,
-	  disabled: _react.PropTypes.bool
-	};
-	
-	exports.default = Option;
-
-/***/ },
-/* 285 */,
-/* 286 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _reactRedux = __webpack_require__(175);
-	
-	var _form = __webpack_require__(281);
-	
-	var _Player = __webpack_require__(275);
-	
-	var _Player2 = _interopRequireDefault(_Player);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state, ownProps) {
-	  return _extends({}, ownProps, {
-	    characters: state.characters,
-	    players: state.players,
-	    selection: {
-	      players: state.form.players,
-	      score: state.form.score
-	    }
-	  });
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    onPlayerUpdate: function onPlayerUpdate(index, value) {
-	      dispatch((0, _form.updatePlayer)(index, value));
-	    },
-	    onCharacterUpdate: function onCharacterUpdate(index, value) {
-	      dispatch((0, _form.updateCharacter)(index, value));
-	    },
-	    onScoreUpdate: function onScoreUpdate(index, value) {
-	      dispatch((0, _form.updateScore)(index, value));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Player2.default);
 
 /***/ }
 /******/ ]);

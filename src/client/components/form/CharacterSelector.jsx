@@ -3,11 +3,8 @@ import OptGroup from '../core/OptGroup';
 import Option from '../core/Option';
 
 
-const findCharById = (characters, id) => characters.find(c => id === c.id);
-
-
-const CharacterSelector = ({ index, characters, players, onUpdate, disable }) => {
-  if (disable) {
+const CharacterSelector = ({ index, characters, favorites, onUpdate, selected }) => {
+  if (!characters.length) {
     return <input disabled="true" placeholder="Choose character..." />;
   }
 
@@ -20,24 +17,16 @@ const CharacterSelector = ({ index, characters, players, onUpdate, disable }) =>
 
   /* Shortcuts */
 
-  let favorites = [];
-
-  if (players[index]) {
-    const ids = players[index].played_characters;
-    favorites = ids.map((id) => {
-      const char = findCharById(characters, id);
-      return {
-        label: char.name,
-        value: char.code,
-      };
-    });
-  }
-
   const renderFavorites = () => {
     if (!favorites.length) {
       return null;
     }
-    return <OptGroup label="Favorites" data={favorites} />;
+    const favs = favorites.map(fav => ({
+      id: fav.id,
+      label: fav.name,
+      value: fav.code,
+    }));
+    return <OptGroup label="Favorites" data={favs} />;
   };
 
   /* All */
@@ -55,15 +44,18 @@ const CharacterSelector = ({ index, characters, players, onUpdate, disable }) =>
 
   /* render() */
 
-  // define selected value
-  let selection;
-  if (favorites.length) {
-    selection = favorites[0].value;
+  // set select props
+  const selectProps = {
+    onChange: handleChange,
+  };
+
+  if (selected) {
+    selectProps.value = selected;
   }
 
   return (
     <div className="component__CharacterSelector">
-      <select onChange={handleChange} value={selection}>
+      <select {...selectProps}>
         <Option label="Choose character..." />
         {renderFavorites(favorites)}
         {renderAll()}
@@ -76,8 +68,8 @@ const CharacterSelector = ({ index, characters, players, onUpdate, disable }) =>
 CharacterSelector.propTypes = {
   index: PropTypes.number,
   characters: PropTypes.arrayOf(PropTypes.object),
-  players: PropTypes.arrayOf(PropTypes.object),
-  disable: PropTypes.bool,
+  favorites: PropTypes.arrayOf(PropTypes.object),
+  selected: PropTypes.string,
   onUpdate: PropTypes.func,
 };
 

@@ -7,6 +7,7 @@ const mapStateToProps = (state, ownProps) => ({
   characters: state.characters,
   players: state.players,
   selection: {
+    characters: state.form.characters,
     players: state.form.players,
     score: state.form.score,
   },

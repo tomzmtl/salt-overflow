@@ -1,4 +1,4 @@
-import characters from '../constants/characters';
+import characters from '../../shared/characters';
 
 
 export default null;

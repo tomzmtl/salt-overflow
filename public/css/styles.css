@@ -406,7 +406,7 @@ body {
       width: 70%; } }
 
 input,
-select {
+select, .component__NumberSelector {
   display: block;
   width: 100%;
   padding: 6px 10px;
@@ -526,14 +526,15 @@ select {
     margin-right: 30px; } }
 
 .component__NumberSelector {
-  display: flex; }
+  display: flex;
+  padding: 6px; }
   .component__NumberSelector div {
     display: flex;
     width: 40px;
-    height: 40px;
-    cursor: pointer;
+    height: 30px;
+    margin-right: 4px;
     background: #f9f9f9;
-    border-left: 1px solid #EEE; }
+    cursor: pointer; }
     .component__NumberSelector div span {
       margin: auto; }
     .component__NumberSelector div:hover {
@@ -542,10 +543,7 @@ select {
       background: #f59214;
       color: white;
       font-weight: bold; }
-    .component__NumberSelector div:first-child {
-      border-radius: 4px 0 0 4px;
-      border-left: 0; }
     .component__NumberSelector div:last-child {
-      border-radius: 0 4px 4px 0; }
+      margin-right: 0; }
 
 /*# sourceMappingURL=styles.css.map*/

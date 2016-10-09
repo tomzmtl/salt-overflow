@@ -1,5 +1,4 @@
-input,
-select {
+%borderedInput {
   display: block;
   width: 100%;
   padding: 6px 10px;
@@ -8,4 +7,9 @@ select {
   border: 1px solid #BBB;
   background: white;
   -webkit-appearance: none;
+}
+
+input,
+select {
+  @extend %borderedInput;
 }

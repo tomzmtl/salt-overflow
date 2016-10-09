@@ -1,3 +1,7 @@
+import Characters from '../../shared/characters';
+import { mapFavorites } from '../helpers.js';
+
+
 export default (form, action) => {
   switch (action.type) {
 
@@ -5,10 +9,23 @@ export default (form, action) => {
       const players = [...form.players];
       players[action.index] = action.player;
 
-      return {
+      const updated = {
         ...form,
         players,
       };
+
+      const favorites = mapFavorites(action.player, Characters);
+      const characters = [...form.characters];
+
+      if (favorites.length) {
+        characters[action.index] = favorites[0];
+      } else {
+        characters[action.index] = null;
+      }
+
+      updated.characters = characters;
+
+      return updated;
     }
 
     case 'UPDATE_CHARACTER': {

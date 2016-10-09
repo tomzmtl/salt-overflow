@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import PlayerSelector from './PlayerSelector';
 import CharacterSelector from './CharacterSelector';
 import ScoreSelector from './ScoreSelector';
+import Characters from '../../../shared/characters';
+import { mapFavorites } from '../../helpers';
 
 
 const Player = (props) => {
@@ -11,22 +13,32 @@ const Player = (props) => {
   };
 
   // player selector
-  const playerSelectorProps = Object.assign({}, base, {
+  const playerSelectorProps = {
+    ...base,
     players: props.players,
     selection: props.selection.players,
     onUpdate: props.onPlayerUpdate,
-  });
+  };
 
   // character selector
-  const characterSelectorProps = Object.assign({}, base, {
-    characters: props.characters,
+  const characterSelectorProps = {
+    ...base,
+    characters: [],
+    favorites: [],
+    selected: '',
     players: props.selection.players,
     onUpdate: props.onCharacterUpdate,
-    disable: true,
-  });
+  };
 
-  if (props.selection.players[props.index]) {
+  const selectedPlayer = props.selection.players[props.index];
+  if (selectedPlayer) {
+    const favorites = mapFavorites(selectedPlayer, Characters);
     characterSelectorProps.disable = false;
+    characterSelectorProps.characters = Characters;
+    if (favorites.length) {
+      characterSelectorProps.favorites = favorites;
+      characterSelectorProps.selected = props.selection.characters[props.index].code;
+    }
   }
 
   // score selector
@@ -49,12 +61,12 @@ const Player = (props) => {
 Player.propTypes = {
   index: PropTypes.number,
   players: PropTypes.arrayOf(PropTypes.object),
-  characters: PropTypes.arrayOf(PropTypes.object),
   onPlayerUpdate: PropTypes.func,
   onCharacterUpdate: PropTypes.func,
   onScoreUpdate: PropTypes.func,
   selection: PropTypes.shape({
     players: PropTypes.arrayOf(PropTypes.object),
+    characters: PropTypes.arrayOf(PropTypes.object),
     score: PropTypes.arrayOf(PropTypes.number),
   }),
 };
