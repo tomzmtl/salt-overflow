@@ -5,8 +5,12 @@
     max-width: 500px;
   }
 
-  .btn {
+  .form-actions {
     margin-top: 35px;
+
+    .btn-disabled {
+      display: inline-block;
+    }
   }
 }
 

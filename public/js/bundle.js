@@ -30758,14 +30758,14 @@
 	  if (!isValid) {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'btn btn-disabled' },
 	      'Submit'
 	    );
 	  }
 	
 	  return _react2.default.createElement(
 	    'button',
-	    { className: 'btn' },
+	    { className: 'btn btn-enabled' },
 	    'Submit'
 	  );
 	};
@@ -30791,7 +30791,11 @@
 	      _react2.default.createElement(_Player2.default, { index: 0 }),
 	      _react2.default.createElement(_Player2.default, { index: 1 })
 	    ),
-	    renderSubmitButton(isValid())
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'form-actions' },
+	      renderSubmitButton(isValid())
+	    )
 	  );
 	};
 	

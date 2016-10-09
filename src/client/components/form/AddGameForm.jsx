@@ -4,10 +4,10 @@ import Player from '../../containers/Player';
 
 const renderSubmitButton = (isValid) => {
   if (!isValid) {
-    return <div>Submit</div>;
+    return <div className="btn btn-disabled">Submit</div>;
   }
 
-  return <button className="btn">Submit</button>;
+  return <button className="btn btn-enabled">Submit</button>;
 };
 
 
@@ -33,7 +33,9 @@ const AddGameForm = ({ players, characters, score }) => {
         <Player index={0} />
         <Player index={1} />
       </div>
-      {renderSubmitButton(isValid())}
+      <div className="form-actions">
+        {renderSubmitButton(isValid())}
+      </div>
     </div>
  );
 };

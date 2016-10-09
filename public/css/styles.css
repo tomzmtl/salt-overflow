@@ -418,20 +418,29 @@ select, .component__NumberSelector {
 
 .btn {
   padding: 8px 15px;
+  border-radius: 2px;
+  border: none; }
+
+.btn-enabled {
   background: #f59214;
   color: white;
-  border-radius: 2px;
-  border: none;
   cursor: pointer; }
-  .btn:hover {
+  .btn-enabled:hover {
     background: #e6850a; }
+
+.btn-disabled {
+  background: #EEE;
+  color: #999;
+  cursor: not-allowed; }
 
 .component__AddGameForm {
   display: block; }
   .component__AddGameForm .fields {
     max-width: 500px; }
-  .component__AddGameForm .btn {
+  .component__AddGameForm .form-actions {
     margin-top: 35px; }
+    .component__AddGameForm .form-actions .btn-disabled {
+      display: inline-block; }
 
 @media (max-width: 520px) {
   .component__Player:first-child {
