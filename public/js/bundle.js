@@ -30327,12 +30327,16 @@
 	          players: players
 	        });
 	
-	        var favorites = (0, _helpers.mapFavorites)(action.player, _characters3.default);
 	        var characters = [].concat(_toConsumableArray(form.characters));
-	        if (favorites.length) {
-	          characters[action.index] = favorites[0];
-	        } else {
+	        if (action.player === null) {
 	          characters[action.index] = null;
+	        } else {
+	          var favorites = (0, _helpers.mapFavorites)(action.player, _characters3.default);
+	          if (favorites.length) {
+	            characters[action.index] = favorites[0];
+	          } else {
+	            characters[action.index] = null;
+	          }
 	        }
 	
 	        updated.characters = characters;
@@ -30344,7 +30348,6 @@
 	      {
 	        var _characters = [].concat(_toConsumableArray(form.characters));
 	        _characters[action.index] = action.character;
-	        console.log(action);
 	
 	        return _extends({}, form, {
 	          characters: _characters
@@ -30752,34 +30755,34 @@
 	
 	var _Player2 = _interopRequireDefault(_Player);
 	
+	var _helpers = __webpack_require__(285);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var renderSubmitButton = function renderSubmitButton(isValid) {
-	  if (!isValid) {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'btn btn-disabled' },
-	      'Submit'
-	    );
-	  }
-	
-	  return _react2.default.createElement(
-	    'button',
-	    { className: 'btn btn-enabled' },
-	    'Submit'
-	  );
-	};
 	
 	var AddGameForm = function AddGameForm(_ref) {
 	  var players = _ref.players;
 	  var characters = _ref.characters;
 	  var score = _ref.score;
 	
-	  var isValid = function isValid() {
-	    if ([players[0], players[1], characters[0], characters[1], score[0], score[1]].includes(null)) {
-	      return false;
+	  var playerIds = players.map(function (p) {
+	    return p ? p.id : null;
+	  });
+	  var valid = (0, _helpers.isFormValid)(playerIds, characters, score);
+	
+	  var renderSubmitButton = function renderSubmitButton() {
+	    if (!valid) {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'btn btn-disabled' },
+	        'Submit'
+	      );
 	    }
-	    return players[0].id !== players[1].id && score[0] !== score[1];
+	
+	    return _react2.default.createElement(
+	      'button',
+	      { className: 'btn btn-enabled' },
+	      'Submit'
+	    );
 	  };
 	
 	  return _react2.default.createElement(
@@ -30794,7 +30797,7 @@
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'form-actions' },
-	      renderSubmitButton(isValid())
+	      renderSubmitButton()
 	    )
 	  );
 	};
@@ -31037,7 +31040,7 @@
 	  var handleChange = function handleChange(e) {
 	    var value = players.find(function (c) {
 	      return c.id === e.target.value;
-	    });
+	    }) || null;
 	    onUpdate(index, value);
 	  };
 	
@@ -31369,7 +31372,7 @@
 	  }
 	
 	  var imgProps = {
-	    className: 'component__CharacterIcon',
+	    className: 'component__CharacterIcon ' + code,
 	    src: 'public/images/characters/small/' + code + '.png'
 	  };
 	
@@ -31425,6 +31428,27 @@
 	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_AddGameForm2.default);
+
+/***/ },
+/* 285 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	exports.default = null;
+	var isFormValid = exports.isFormValid = function isFormValid(playerIds, characters, score) {
+	  if ([].concat(_toConsumableArray(playerIds), _toConsumableArray(characters), _toConsumableArray(score)).includes(null)) {
+	    return false;
+	  }
+	
+	  return playerIds[0] !== playerIds[1] && score[0] !== score[1];
+	};
 
 /***/ }
 /******/ ]);

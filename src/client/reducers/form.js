@@ -14,12 +14,16 @@ export default (form, action) => {
         players,
       };
 
-      const favorites = mapFavorites(action.player, Characters);
       const characters = [...form.characters];
-      if (favorites.length) {
-        characters[action.index] = favorites[0];
-      } else {
+      if (action.player === null) {
         characters[action.index] = null;
+      } else {
+        const favorites = mapFavorites(action.player, Characters);
+        if (favorites.length) {
+          characters[action.index] = favorites[0];
+        } else {
+          characters[action.index] = null;
+        }
       }
 
       updated.characters = characters;
@@ -30,7 +34,6 @@ export default (form, action) => {
     case 'UPDATE_CHARACTER': {
       const characters = [...form.characters];
       characters[action.index] = action.character;
-      console.log(action);
 
       return {
         ...form,

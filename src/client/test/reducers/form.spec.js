@@ -95,6 +95,28 @@ describe('Reducers (form)', () => {
     expect(result.form.characters).to.deep.equal([null, null]);
   });
 
+  it('Empties character selector if selected player is empty', () => {
+    const result = reducer(
+      {
+        form: {
+          characters: [
+            {
+              code: 'jig',
+            },
+            null,
+          ],
+          players: [3, null],
+        },
+      },
+      {
+        type: 'UPDATE_PLAYER',
+        index: 0,
+        player: null,
+      });
+
+    expect(result.form.characters).to.deep.equal([null, null]);
+  });
+
   it('Updates character selection', () => {
     testReducer(reducer,
       {

@@ -15,6 +15,7 @@ export default (app) => {
 
   app.get('/api/v1/players', players.all);
   app.get('/api/v1/games', games.all);
+  app.post('/api/v1/games', games.add);
   app.get('/api/v1/characters', characters.all);
 
   app.use('*/public', express.static('public'));

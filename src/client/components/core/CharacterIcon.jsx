@@ -7,7 +7,7 @@ const CharacterIcon = ({ code }) => {
   }
 
   const imgProps = {
-    className: 'component__CharacterIcon',
+    className: `component__CharacterIcon ${code}`,
     src: `public/images/characters/small/${code}.png`,
   };
 

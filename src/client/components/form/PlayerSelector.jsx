@@ -4,7 +4,7 @@ import Option from '../core/Option';
 
 const PlayerSelector = ({ index, players, onUpdate, selection }) => {
   const handleChange = (e) => {
-    const value = players.find(c => c.id === e.target.value);
+    const value = players.find(c => c.id === e.target.value) || null;
     onUpdate(index, value);
   };
 

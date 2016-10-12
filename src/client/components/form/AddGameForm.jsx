@@ -1,30 +1,18 @@
 import React, { PropTypes } from 'react';
 import Player from '../../containers/Player';
-
-
-const renderSubmitButton = (isValid) => {
-  if (!isValid) {
-    return <div className="btn btn-disabled">Submit</div>;
-  }
-
-  return <button className="btn btn-enabled">Submit</button>;
-};
+import { isFormValid } from '../../../shared/helpers';
 
 
 const AddGameForm = ({ players, characters, score }) => {
-  const isValid = () => {
-    if ([
-      players[0],
-      players[1],
-      characters[0],
-      characters[1],
-      score[0],
-      score[1],
-    ].includes(null)) {
-      return false;
+  const playerIds = players.map(p => (p ? p.id : null));
+  const valid = isFormValid(playerIds, characters, score);
+
+  const renderSubmitButton = () => {
+    if (!valid) {
+      return <div className="btn btn-disabled">Submit</div>;
     }
-    return players[0].id !== players[1].id &&
-          score[0] !== score[1];
+
+    return <button className="btn btn-enabled">Submit</button>;
   };
 
   return (
@@ -34,10 +22,10 @@ const AddGameForm = ({ players, characters, score }) => {
         <Player index={1} />
       </div>
       <div className="form-actions">
-        {renderSubmitButton(isValid())}
+        {renderSubmitButton()}
       </div>
     </div>
- );
+  );
 };
 
 
