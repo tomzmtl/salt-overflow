@@ -8,6 +8,5 @@ export default ({ players, games }) => (
   <div>
     <SaltyMeter players={players} />
     <LatestResults games={games} />
-    <Link to="/add">Add</Link>
   </div>
 );

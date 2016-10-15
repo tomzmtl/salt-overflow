@@ -372,9 +372,14 @@ body {
   box-sizing: border-box; }
 
 .main-header {
+  display: flex;
+  justify-content: space-between;
   padding: 20px 20px 14px 20px;
   border-bottom: 3px solid #f59214;
   background: white; }
+  .main-header a {
+    text-decoration: none;
+    cursor: pointer; }
   .main-header h1 {
     margin: 0;
     font-weight: normal;
@@ -384,6 +389,9 @@ body {
       margin-right: 1px;
       font-weight: 600;
       color: #f59214; }
+  .main-header .add-game {
+    color: #666;
+    font-size: 0.9em; }
 
 .block {
   padding: 30px 20px;

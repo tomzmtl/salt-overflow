@@ -1,7 +1,14 @@
 .main-header {
+  display: flex;
+  justify-content: space-between;
   padding: 20px 20px 14px 20px;
   border-bottom: 3px solid $theme_primary;
   background: white;
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
 
   h1 {
     margin: 0;
@@ -14,6 +21,11 @@
       font-weight: 600;
       color: $theme_primary;
     }
+  }
+
+  .add-game {
+    color: #666;
+    font-size: 0.9em;
   }
 }
 
