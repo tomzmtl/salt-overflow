@@ -91,11 +91,11 @@
 	
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
 	
-	var _AddGameForm = __webpack_require__(284);
+	var _AddGameForm = __webpack_require__(274);
 	
 	var _AddGameForm2 = _interopRequireDefault(_AddGameForm);
 	
-	__webpack_require__(277);
+	__webpack_require__(285);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30409,6 +30409,14 @@
 	  value: true
 	});
 	exports.default = null;
+	
+	/**
+	 * Returns a list of favorite character objects from a plyer object.
+	 * @param player {Object}
+	 * @param characters {Object}
+	 * @return {array}
+	 */
+	
 	var mapFavorites = exports.mapFavorites = function mapFavorites(player, characters) {
 	  var ids = 'played_characters' in player ? player.played_characters : [];
 	  if (ids.length === 0) {
@@ -30451,6 +30459,12 @@
 	  value: true
 	});
 	exports.default = null;
+	
+	/**
+	 * Initial action.
+	 * @return {function}
+	 */
+	
 	var fetchDashboardData = exports.fetchDashboardData = function fetchDashboardData() {
 	  return function (dispatch) {
 	    dispatch({ type: 'LOADING' });
@@ -30686,7 +30700,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _CharacterIcon = __webpack_require__(283);
+	var _CharacterIcon = __webpack_require__(273);
 	
 	var _CharacterIcon2 = _interopRequireDefault(_CharacterIcon);
 	
@@ -30751,11 +30765,151 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Player = __webpack_require__(274);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CharacterIcon = function CharacterIcon(_ref) {
+	  var code = _ref.code;
+	
+	  if (code === null) {
+	    return null;
+	  }
+	
+	  var imgProps = {
+	    className: 'component__CharacterIcon ' + code,
+	    src: 'public/images/characters/small/' + code + '.png'
+	  };
+	
+	  return _react2.default.createElement('img', imgProps);
+	};
+	
+	CharacterIcon.propTypes = {
+	  code: _react.PropTypes.string
+	};
+	
+	exports.default = CharacterIcon;
+
+/***/ },
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(175);
+	
+	var _form = __webpack_require__(275);
+	
+	var _AddGameForm = __webpack_require__(276);
+	
+	var _AddGameForm2 = _interopRequireDefault(_AddGameForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    characters: state.form.characters,
+	    players: state.form.players,
+	    score: state.form.score
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    onPlayerUpdate: function onPlayerUpdate(index, value) {
+	      dispatch((0, _form.updatePlayer)(index, value));
+	    },
+	    onCharacterUpdate: function onCharacterUpdate(index, value) {
+	      dispatch((0, _form.updateCharacter)(index, value));
+	    },
+	    onScoreUpdate: function onScoreUpdate(index, value) {
+	      dispatch((0, _form.updateScore)(index, value));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_AddGameForm2.default);
+
+/***/ },
+/* 275 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/* Add game form actions */
+	
+	/**
+	 * Update score.
+	 * @param {number} index
+	 * @param {number} value
+	 * @return {function}
+	 */
+	var updateScore = exports.updateScore = function updateScore(index, value) {
+	  return function (dispatch) {
+	    return dispatch({
+	      type: 'UPDATE_SCORE',
+	      index: index,
+	      score: value
+	    });
+	  };
+	};
+	
+	/**
+	 * Update player name.
+	 * @param {number} index
+	 * @param {object} value
+	 * @return {function}
+	 */
+	var updatePlayer = exports.updatePlayer = function updatePlayer(index, value) {
+	  return function (dispatch) {
+	    return dispatch({
+	      type: 'UPDATE_PLAYER',
+	      index: index,
+	      player: value
+	    });
+	  };
+	};
+	
+	/**
+	 * Update character.
+	 * @param {number} index
+	 * @param {object} value
+	 * @return {function}
+	 */
+	var updateCharacter = exports.updateCharacter = function updateCharacter(index, value) {
+	  return function (dispatch) {
+	    return dispatch({
+	      type: 'UPDATE_CHARACTER',
+	      index: index,
+	      character: value
+	    });
+	  };
+	};
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Player = __webpack_require__(277);
 	
 	var _Player2 = _interopRequireDefault(_Player);
 	
-	var _helpers = __webpack_require__(285);
+	var _helpers = __webpack_require__(284);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30811,7 +30965,7 @@
 	exports.default = AddGameForm;
 
 /***/ },
-/* 274 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30826,7 +30980,7 @@
 	
 	var _form = __webpack_require__(275);
 	
-	var _Player = __webpack_require__(276);
+	var _Player = __webpack_require__(278);
 	
 	var _Player2 = _interopRequireDefault(_Player);
 	
@@ -30861,46 +31015,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Player2.default);
 
 /***/ },
-/* 275 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var updateScore = exports.updateScore = function updateScore(index, value) {
-	  return function (dispatch) {
-	    return dispatch({
-	      type: 'UPDATE_SCORE',
-	      index: index,
-	      score: value
-	    });
-	  };
-	};
-	
-	var updatePlayer = exports.updatePlayer = function updatePlayer(index, value) {
-	  return function (dispatch) {
-	    return dispatch({
-	      type: 'UPDATE_PLAYER',
-	      index: index,
-	      player: value
-	    });
-	  };
-	};
-	
-	var updateCharacter = exports.updateCharacter = function updateCharacter(index, value) {
-	  return function (dispatch) {
-	    return dispatch({
-	      type: 'UPDATE_CHARACTER',
-	      index: index,
-	      character: value
-	    });
-	  };
-	};
-
-/***/ },
-/* 276 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30915,15 +31030,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PlayerSelector = __webpack_require__(278);
+	var _PlayerSelector = __webpack_require__(279);
 	
 	var _PlayerSelector2 = _interopRequireDefault(_PlayerSelector);
 	
-	var _CharacterSelector = __webpack_require__(280);
+	var _CharacterSelector = __webpack_require__(281);
 	
 	var _CharacterSelector2 = _interopRequireDefault(_CharacterSelector);
 	
-	var _ScoreSelector = __webpack_require__(282);
+	var _ScoreSelector = __webpack_require__(283);
 	
 	var _ScoreSelector2 = _interopRequireDefault(_ScoreSelector);
 	
@@ -31004,13 +31119,7 @@
 	exports.default = Player;
 
 /***/ },
-/* 277 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31025,7 +31134,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Option = __webpack_require__(279);
+	var _Option = __webpack_require__(280);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
@@ -31083,7 +31192,7 @@
 	exports.default = PlayerSelector;
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31124,7 +31233,7 @@
 	exports.default = Option;
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31139,15 +31248,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _OptGroup = __webpack_require__(281);
+	var _OptGroup = __webpack_require__(282);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
-	var _Option = __webpack_require__(279);
+	var _Option = __webpack_require__(280);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _CharacterIcon = __webpack_require__(283);
+	var _CharacterIcon = __webpack_require__(273);
 	
 	var _CharacterIcon2 = _interopRequireDefault(_CharacterIcon);
 	
@@ -31242,7 +31351,7 @@
 	exports.default = CharacterSelector;
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31257,7 +31366,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Option = __webpack_require__(279);
+	var _Option = __webpack_require__(280);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
@@ -31285,7 +31394,7 @@
 	exports.default = OptGroup;
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31349,88 +31458,7 @@
 	exports.default = ScoreSelector;
 
 /***/ },
-/* 283 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var CharacterIcon = function CharacterIcon(_ref) {
-	  var code = _ref.code;
-	
-	  if (code === null) {
-	    return null;
-	  }
-	
-	  var imgProps = {
-	    className: 'component__CharacterIcon ' + code,
-	    src: 'public/images/characters/small/' + code + '.png'
-	  };
-	
-	  return _react2.default.createElement('img', imgProps);
-	};
-	
-	CharacterIcon.propTypes = {
-	  code: _react.PropTypes.string
-	};
-	
-	exports.default = CharacterIcon;
-
-/***/ },
 /* 284 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _reactRedux = __webpack_require__(175);
-	
-	var _form = __webpack_require__(275);
-	
-	var _AddGameForm = __webpack_require__(273);
-	
-	var _AddGameForm2 = _interopRequireDefault(_AddGameForm);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var mapStateToProps = function mapStateToProps(state) {
-	  return {
-	    characters: state.form.characters,
-	    players: state.form.players,
-	    score: state.form.score
-	  };
-	};
-	
-	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {
-	    onPlayerUpdate: function onPlayerUpdate(index, value) {
-	      dispatch((0, _form.updatePlayer)(index, value));
-	    },
-	    onCharacterUpdate: function onCharacterUpdate(index, value) {
-	      dispatch((0, _form.updateCharacter)(index, value));
-	    },
-	    onScoreUpdate: function onScoreUpdate(index, value) {
-	      dispatch((0, _form.updateScore)(index, value));
-	    }
-	  };
-	};
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_AddGameForm2.default);
-
-/***/ },
-/* 285 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -31442,6 +31470,15 @@
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	exports.default = null;
+	
+	/**
+	 * Assess the validity of a game form dataset.
+	 * @param {array} playerIds
+	 * @param {array} characters
+	 * @param {array} score
+	 * @return {boolean}
+	 */
+	
 	var isFormValid = exports.isFormValid = function isFormValid(playerIds, characters, score) {
 	  if ([].concat(_toConsumableArray(playerIds), _toConsumableArray(characters), _toConsumableArray(score)).includes(null)) {
 	    return false;
@@ -31449,6 +31486,12 @@
 	
 	  return playerIds[0] !== playerIds[1] && score[0] !== score[1];
 	};
+
+/***/ },
+/* 285 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { MongoClient, ObjectId } from 'mongodb';
-import { mapGames, mapPlayers, hydratePlayer, hydrateCharacter } from '../helpers';
+import { mapGames, mapPlayers, hydratePlayers, hydrateCharacters } from '../helpers';
 import { isFormValid } from '../../shared/helpers';
 import Characters from '../../shared/characters';
 
@@ -8,6 +8,9 @@ import Characters from '../../shared/characters';
 export default null;
 
 
+/**
+ * Express middleware. List all games.
+ */
 export const all = (req, res) => {
   // Connect to the DB
   MongoClient.connect(process.env.MONGODB_URI, (err, db) => {
@@ -27,6 +30,9 @@ export const all = (req, res) => {
 };
 
 
+/**
+ * Express middleware. Create a new game.
+ */
 export const add = (req, res) => {
   // prepare data
   const players = [];
@@ -84,8 +90,8 @@ export const add = (req, res) => {
         if (r.result.ok) {
           const response = {
             ...r.ops[0],
-            players: players.map(id => hydratePlayer(id, allPlayers, ['name', 'id'])),
-            characters: characters.map(id => hydrateCharacter(id, Characters)),
+            players: hydratePlayers(players, allPlayers, ['name', 'id']),
+            characters: hydrateCharacters(characters, Characters),
           };
           res.status(201).send(response);
           return;

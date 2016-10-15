@@ -1,6 +1,10 @@
 export default null;
 
 
+/**
+ * Initial action.
+ * @return {function}
+ */
 export const fetchDashboardData = () => (dispatch) => {
   dispatch({ type: 'LOADING' });
 

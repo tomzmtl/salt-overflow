@@ -5,6 +5,9 @@ import { mapPlayers } from '../helpers';
 export default null;
 
 
+/**
+ * Express middleware. List all players.
+ */
 export const all = (req, res) => {
   // Connection URL
   const url = process.env.MONGODB_URI;
