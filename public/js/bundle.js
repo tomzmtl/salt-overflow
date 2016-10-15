@@ -87,15 +87,15 @@
 	
 	var _actions = __webpack_require__(267);
 	
-	var _View = __webpack_require__(274);
+	var _View = __webpack_require__(268);
 	
 	var _View2 = _interopRequireDefault(_View);
 	
-	var _AddGameForm = __webpack_require__(275);
+	var _AddGameForm = __webpack_require__(276);
 	
 	var _AddGameForm2 = _interopRequireDefault(_AddGameForm);
 	
-	__webpack_require__(286);
+	__webpack_require__(287);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30400,21 +30400,13 @@
 
 /***/ },
 /* 265 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.makeView = exports.mapFavorites = undefined;
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
 	exports.default = null;
 	
 	/**
@@ -30434,10 +30426,6 @@
 	      return id === c.id;
 	    });
 	  });
-	};
-	
-	var makeView = exports.makeView = function makeView(component) {
-	  return _react2.default.createElement(View, { component: component });
 	};
 
 /***/ },
@@ -30509,9 +30497,47 @@
 	  value: true
 	});
 	
-	var _reactRedux = __webpack_require__(175);
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
 	
 	var _Dashboard = __webpack_require__(269);
+	
+	var _Dashboard2 = _interopRequireDefault(_Dashboard);
+	
+	var _Header = __webpack_require__(275);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (_ref) {
+	  var content = _ref.content;
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_Header2.default, null),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'app-content' },
+	      content || _react2.default.createElement(_Dashboard2.default, null)
+	    )
+	  );
+	};
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(175);
+	
+	var _Dashboard = __webpack_require__(270);
 	
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
 	
@@ -30527,7 +30553,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(_Dashboard2.default);
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30542,11 +30568,11 @@
 	
 	var _reactRouter = __webpack_require__(199);
 	
-	var _SaltyMeter = __webpack_require__(270);
+	var _SaltyMeter = __webpack_require__(271);
 	
 	var _SaltyMeter2 = _interopRequireDefault(_SaltyMeter);
 	
-	var _LatestResults = __webpack_require__(271);
+	var _LatestResults = __webpack_require__(272);
 	
 	var _LatestResults2 = _interopRequireDefault(_LatestResults);
 	
@@ -30564,7 +30590,7 @@
 	};
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -30634,7 +30660,7 @@
 	};
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30649,7 +30675,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ResultRow = __webpack_require__(272);
+	var _ResultRow = __webpack_require__(273);
 	
 	var _ResultRow2 = _interopRequireDefault(_ResultRow);
 	
@@ -30693,7 +30719,7 @@
 	exports.default = LatestResults;
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30706,7 +30732,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _CharacterIcon = __webpack_require__(273);
+	var _CharacterIcon = __webpack_require__(274);
 	
 	var _CharacterIcon2 = _interopRequireDefault(_CharacterIcon);
 	
@@ -30758,7 +30784,7 @@
 	exports.default = ResultRow;
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30795,7 +30821,7 @@
 	exports.default = CharacterIcon;
 
 /***/ },
-/* 274 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30808,32 +30834,46 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Dashboard = __webpack_require__(268);
-	
-	var _Dashboard2 = _interopRequireDefault(_Dashboard);
-	
-	var _Header = __webpack_require__(287);
-	
-	var _Header2 = _interopRequireDefault(_Header);
+	var _reactRouter = __webpack_require__(199);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = function (_ref) {
-	  var content = _ref.content;
+	exports.default = function () {
 	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    _react2.default.createElement(_Header2.default, null),
+	    'header',
+	    { className: 'main-header' },
 	    _react2.default.createElement(
 	      'div',
-	      { className: 'app-content' },
-	      content || _react2.default.createElement(_Dashboard2.default, null)
+	      { className: 'logo' },
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/' },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            'Salt'
+	          ),
+	          'Overflow'
+	        )
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'add-game' },
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/add', className: 'add-game' },
+	        'Add a game'
+	      )
 	    )
 	  );
 	};
 
 /***/ },
-/* 275 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30844,9 +30884,9 @@
 	
 	var _reactRedux = __webpack_require__(175);
 	
-	var _form = __webpack_require__(276);
+	var _form = __webpack_require__(277);
 	
-	var _AddGameForm = __webpack_require__(277);
+	var _AddGameForm = __webpack_require__(278);
 	
 	var _AddGameForm2 = _interopRequireDefault(_AddGameForm);
 	
@@ -30877,7 +30917,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_AddGameForm2.default);
 
 /***/ },
-/* 276 */
+/* 277 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30936,7 +30976,7 @@
 	};
 
 /***/ },
-/* 277 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30949,11 +30989,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Player = __webpack_require__(278);
+	var _Player = __webpack_require__(279);
 	
 	var _Player2 = _interopRequireDefault(_Player);
 	
-	var _helpers = __webpack_require__(285);
+	var _helpers = __webpack_require__(286);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -31009,7 +31049,7 @@
 	exports.default = AddGameForm;
 
 /***/ },
-/* 278 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31022,9 +31062,9 @@
 	
 	var _reactRedux = __webpack_require__(175);
 	
-	var _form = __webpack_require__(276);
+	var _form = __webpack_require__(277);
 	
-	var _Player = __webpack_require__(279);
+	var _Player = __webpack_require__(280);
 	
 	var _Player2 = _interopRequireDefault(_Player);
 	
@@ -31059,7 +31099,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Player2.default);
 
 /***/ },
-/* 279 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31074,15 +31114,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PlayerSelector = __webpack_require__(280);
+	var _PlayerSelector = __webpack_require__(281);
 	
 	var _PlayerSelector2 = _interopRequireDefault(_PlayerSelector);
 	
-	var _CharacterSelector = __webpack_require__(282);
+	var _CharacterSelector = __webpack_require__(283);
 	
 	var _CharacterSelector2 = _interopRequireDefault(_CharacterSelector);
 	
-	var _ScoreSelector = __webpack_require__(284);
+	var _ScoreSelector = __webpack_require__(285);
 	
 	var _ScoreSelector2 = _interopRequireDefault(_ScoreSelector);
 	
@@ -31163,7 +31203,7 @@
 	exports.default = Player;
 
 /***/ },
-/* 280 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31178,7 +31218,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Option = __webpack_require__(281);
+	var _Option = __webpack_require__(282);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
@@ -31236,7 +31276,7 @@
 	exports.default = PlayerSelector;
 
 /***/ },
-/* 281 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31277,7 +31317,7 @@
 	exports.default = Option;
 
 /***/ },
-/* 282 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31292,15 +31332,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _OptGroup = __webpack_require__(283);
+	var _OptGroup = __webpack_require__(284);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
-	var _Option = __webpack_require__(281);
+	var _Option = __webpack_require__(282);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _CharacterIcon = __webpack_require__(273);
+	var _CharacterIcon = __webpack_require__(274);
 	
 	var _CharacterIcon2 = _interopRequireDefault(_CharacterIcon);
 	
@@ -31395,7 +31435,7 @@
 	exports.default = CharacterSelector;
 
 /***/ },
-/* 283 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31410,7 +31450,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Option = __webpack_require__(281);
+	var _Option = __webpack_require__(282);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
@@ -31438,7 +31478,7 @@
 	exports.default = OptGroup;
 
 /***/ },
-/* 284 */
+/* 285 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31502,7 +31542,7 @@
 	exports.default = ScoreSelector;
 
 /***/ },
-/* 285 */
+/* 286 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -31532,62 +31572,10 @@
 	};
 
 /***/ },
-/* 286 */
+/* 287 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 287 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(199);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = function () {
-	  return _react2.default.createElement(
-	    'header',
-	    { className: 'main-header' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'logo' },
-	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/' },
-	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            'Salt'
-	          ),
-	          'Overflow'
-	        )
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'add-game' },
-	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/add', className: 'add-game' },
-	        'Add a game'
-	      )
-	    )
-	  );
-	};
 
 /***/ }
 /******/ ]);
