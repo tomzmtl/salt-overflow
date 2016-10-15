@@ -1,3 +1,4 @@
+import pick from 'lodash.pick';
 import Characters from '../shared/characters';
 
 
@@ -22,3 +23,16 @@ export const mapPlayers = players =>
     games_played: 0,
     sessions_played: 0,
   }));
+
+
+export const hydratePlayer = (id, players, keys = []) => {
+  const player = players.find(p => id === p.id);
+  if (player && keys.length) {
+    return pick(player, keys);
+  }
+  return player;
+};
+
+
+export const hydrateCharacter = (id, characters) =>
+  characters.find(char => id === char.id);

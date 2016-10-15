@@ -1,6 +1,8 @@
+import moment from 'moment';
 import { MongoClient, ObjectId } from 'mongodb';
-import { mapGames, mapPlayers } from '../helpers';
+import { mapGames, mapPlayers, hydratePlayer, hydrateCharacter } from '../helpers';
 import { isFormValid } from '../../shared/helpers';
+import Characters from '../../shared/characters';
 
 
 export default null;
@@ -26,6 +28,7 @@ export const all = (req, res) => {
 
 
 export const add = (req, res) => {
+  // prepare data
   const players = [];
   const characters = [];
   const score = [];
@@ -35,8 +38,8 @@ export const add = (req, res) => {
     score.push(player.score);
   });
 
+  // validate form data
   const valid = isFormValid(players, characters, score);
-
   if (!valid) {
     res.status(422).send({
       message: 'Invalid data.',
@@ -45,6 +48,7 @@ export const add = (req, res) => {
     return;
   }
 
+  // prepare mongo query
   const dbq = {
     _id: { $in: req.body.map(p => new ObjectId(p.player)) },
   };
@@ -52,6 +56,10 @@ export const add = (req, res) => {
   // Connect to the DB
   MongoClient.connect(process.env.MONGODB_URI, (err, db) => {
     db.collection('players').find(dbq).toArray().then((results) => {
+      // normalize data
+      const allPlayers = mapPlayers(results);
+
+      // validate provided player ids
       if (results.length !== 2) {
         res.status(422).send({
           message: 'Invalid players.',
@@ -61,10 +69,30 @@ export const add = (req, res) => {
         return;
       }
 
-      // insert game
+      // prepare payload
+      const payload = {
+        players,
+        characters,
+        score,
+        session: 0,
+        approved: false,
+        created_at: moment().format('YYYY-MM-DD HH:mm:SS'),
+      };
 
-      res.send({ done: true });
-      db.close();
+      // insert game
+      db.collection('games').insert(payload).then((r) => {
+        if (r.result.ok) {
+          const response = {
+            ...r.ops[0],
+            players: players.map(id => hydratePlayer(id, allPlayers, ['name', 'id'])),
+            characters: characters.map(id => hydrateCharacter(id, Characters)),
+          };
+          res.status(201).send(response);
+          return;
+        }
+        res.status(500).send();
+        db.close();
+      });
     });
   });
 };
