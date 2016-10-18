@@ -9,10 +9,5 @@ export default () => (
         <h1><span>Salt</span>Overflow</h1>
       </Link>
     </div>
-    <div className="add-game">
-      <Link to="/add" className="add-game">
-        Add a game
-      </Link>
-    </div>
   </header>
 );

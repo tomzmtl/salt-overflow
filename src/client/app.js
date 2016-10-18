@@ -13,7 +13,7 @@ import initialStore from './store';
 import { fetchDashboardData } from './actions/actions';
 
 import View from './components/core/View';
-import AddGameForm from './containers/AddGameForm';
+// import AddGameForm from './containers/AddGameForm';
 
 import '../scss/app.scss';
 
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route path="/" component={View}>
-            <Route path="add" components={{ content: AddGameForm }} />
+            {/* <Route path="add" components={{ content: AddGameForm }} />*/}
           </Route>
         </Router>
       </Provider>,
