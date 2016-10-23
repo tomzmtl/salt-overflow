@@ -5,7 +5,7 @@ import LatestResults from './LatestResults';
 
 
 export default ({ players, games }) => (
-  <div>
+  <div className="block-wrapper">
     <SaltyMeter players={players} />
     <LatestResults games={games} />
   </div>

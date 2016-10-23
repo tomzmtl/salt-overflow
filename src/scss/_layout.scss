@@ -1,9 +1,13 @@
 .main-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: space-between;
   padding: 20px 20px 14px 20px;
   border-bottom: 3px solid $theme_primary;
-  background: white;
+  background: rgba(0, 0, 0, 0.9);
 
   a {
     text-decoration: none;
@@ -14,7 +18,7 @@
     margin: 0;
     font-weight: normal;
     font-size: 1em;
-    color: #666;
+    color: #AAA;
 
     span {
       margin-right: 1px;
@@ -24,13 +28,17 @@
   }
 }
 
+.app-content {
+  padding-top: 60px;
+}
+
 .block {
-  padding: 30px 20px;
-  background: white;
-  border-bottom: 1px solid rgba($theme_primary, 0.3);
+  margin-bottom: 3%;
+  border-radius: 3px;
 
   > header {
-    margin-bottom: 20px;
+    padding: 20px;
+    background: darken($theme_primary, 40%);
 
     h1 {
       margin: 0;
@@ -38,20 +46,49 @@
       font-weight: 400;
     }
   }
+
+  > .content {
+    padding: 20px;
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.loading {
+  height: 100vh;
+  display: flex;
+
+  > div {
+    margin: auto;
+  }
+}
+
+.main-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-top: 3px solid $theme_primary;
+
+  a {
+    color: #999;
+    text-decoration: none;
+  }
 }
 
 
 @media (min-width: 520px) {
   .block {
-    display: flex;
+    //display: flex;
 
     > header {
-      width: 30%;
-      max-width: 150px;
+      //width: 30%;
+      //max-width: 150px;
     }
 
     > .content {
-      width: 70%;
+      //width: 70%;
     }
   }
 }

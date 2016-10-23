@@ -4,7 +4,7 @@ import React from 'react';
 const renderRow = (player, index) => (
   <li key={index}>
     <div className="name">{player.name}</div>
-    <div className="score">{player.salt}</div>
+    <div className="salt">{player.salt}</div>
   </li>
 );
 

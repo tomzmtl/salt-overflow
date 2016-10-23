@@ -13,7 +13,7 @@ const ResultRow = ({ players, score, characters, winner }) => {
     </div>
   ));
 
-  return (<li>{p}</li>);
+  return (<li className="game">{p}</li>);
 };
 
 

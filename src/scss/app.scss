@@ -1,13 +1,14 @@
 @import 'normalize';
 
 body {
-  background: #FCFCFC;
+  background: #060606;
+  color: #CCC;
   font-family: 'Poppins', sans-serif;
 }
 
 * { box-sizing: border-box }
 
-$theme_primary: #f59214;
+$theme_primary: hsl(150, 50, 50);
 
 @import 'layout';
 @import 'form';

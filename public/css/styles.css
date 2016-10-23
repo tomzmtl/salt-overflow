@@ -365,18 +365,23 @@ textarea {
   /* 2 */ }
 
 body {
-  background: #FCFCFC;
+  background: #060606;
+  color: #CCC;
   font-family: 'Poppins', sans-serif; }
 
 * {
   box-sizing: border-box; }
 
 .main-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: space-between;
   padding: 20px 20px 14px 20px;
-  border-bottom: 3px solid #f59214;
-  background: white; }
+  border-bottom: 3px solid #40bf80;
+  background: rgba(0, 0, 0, 0.9); }
   .main-header a {
     text-decoration: none;
     cursor: pointer; }
@@ -384,31 +389,44 @@ body {
     margin: 0;
     font-weight: normal;
     font-size: 1em;
-    color: #666; }
+    color: #AAA; }
     .main-header h1 span {
       margin-right: 1px;
       font-weight: 600;
-      color: #f59214; }
+      color: #40bf80; }
+
+.app-content {
+  padding-top: 60px; }
 
 .block {
-  padding: 30px 20px;
-  background: white;
-  border-bottom: 1px solid rgba(245, 146, 20, 0.3); }
+  margin-bottom: 3%;
+  border-radius: 3px; }
   .block > header {
-    margin-bottom: 20px; }
+    padding: 20px;
+    background: #0d261a; }
     .block > header h1 {
       margin: 0;
       font-size: 1.1em;
       font-weight: 400; }
+  .block > .content {
+    padding: 20px; }
+  .block:first-child {
+    margin-left: 0; }
 
-@media (min-width: 520px) {
-  .block {
-    display: flex; }
-    .block > header {
-      width: 30%;
-      max-width: 150px; }
-    .block > .content {
-      width: 70%; } }
+.loading {
+  height: 100vh;
+  display: flex; }
+  .loading > div {
+    margin: auto; }
+
+.main-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-top: 3px solid #40bf80; }
+  .main-footer a {
+    color: #999;
+    text-decoration: none; }
 
 input,
 select, .component__NumberSelector {
@@ -427,11 +445,11 @@ select, .component__NumberSelector {
   border: none; }
 
 .btn-enabled {
-  background: #f59214;
+  background: #40bf80;
   color: white;
   cursor: pointer; }
   .btn-enabled:hover {
-    background: #e6850a; }
+    background: #39ac73; }
 
 .btn-disabled {
   background: #EEE;
@@ -475,56 +493,34 @@ select, .component__NumberSelector {
   margin: 0;
   padding: 0;
   list-style-type: none;
-  flex-wrap: wrap;
-  max-width: 650px; }
+  flex-wrap: wrap; }
 
-.component__LatestResults li {
+.component__LatestResults .game {
+  width: 50%;
   display: flex;
-  flex-direction: row;
-  background: #FCFCFC;
+  flex-direction: column;
+  margin-bottom: 30px;
+  background: rgba(0, 0, 0, 0.1);
   text-align: center; }
-  .component__LatestResults li > div {
-    padding: 5px; }
-  .component__LatestResults li .player {
-    width: 50%; }
-  .component__LatestResults li .name {
-    font-size: 0.8em; }
-    .component__LatestResults li .name.p1 {
-      padding-right: 10px;
-      text-align: right; }
-    .component__LatestResults li .name.p2 {
-      padding-left: 10px; }
-  .component__LatestResults li:nth-child(odd) {
-    background: #F7F7F7; }
-  .component__LatestResults li .player.winner .name {
-    font-weight: 700;
-    color: #f59214; }
-  .component__LatestResults li .player.loser .component__CharacterIcon {
-    opacity: 0.5; }
 
-@media (max-width: 579px) {
-  .component__LatestResults li {
-    width: 47.5%;
-    margin-right: 5%;
-    margin-bottom: 5%; }
-    .component__LatestResults li:nth-child(2n+2) {
-      margin-right: 0; } }
-
-@media (min-width: 580px) and (max-width: 779px) {
-  .component__LatestResults li {
-    width: 32%;
-    margin-right: 2%;
-    margin-bottom: 4%; }
-    .component__LatestResults li:nth-child(3n+3) {
-      margin-right: 0; } }
-
-@media (min-width: 780px) {
-  .component__LatestResults li {
-    width: 22%;
-    margin-right: 4%;
-    margin-bottom: 4%; }
-    .component__LatestResults li:nth-child(4n+4) {
-      margin-right: 0; } }
+.component__LatestResults .player {
+  display: flex;
+  line-height: 1; }
+  .component__LatestResults .player .name {
+    margin-right: 10px; }
+  .component__LatestResults .player .icon {
+    display: none; }
+  .component__LatestResults .player:nth-child(odd) {
+    background: rgba(0, 0, 0, 0.2); }
+  .component__LatestResults .player.winner {
+    order: 1;
+    margin-bottom: 5px; }
+    .component__LatestResults .player.winner .score {
+      font-weight: 700;
+      color: #40bf80; }
+  .component__LatestResults .player.loser {
+    order: 2;
+    opacity: 0.7; }
 
 .component__NumberSelector {
   display: flex;
@@ -541,7 +537,7 @@ select, .component__NumberSelector {
     .component__NumberSelector div:hover {
       background: #f4f4f4; }
     .component__NumberSelector div.active {
-      background: #f59214;
+      background: #40bf80;
       color: white;
       font-weight: bold; }
     .component__NumberSelector div:last-child {
@@ -550,22 +546,15 @@ select, .component__NumberSelector {
 .component__SaltyMeter ul {
   margin: 0;
   padding: 0;
-  max-width: 300px;
   list-style-type: none; }
 
 .component__SaltyMeter li {
-  display: flex;
-  background: #F7F7F7; }
-  .component__SaltyMeter li:nth-child(even) {
-    background: #FCFCFC; }
-  .component__SaltyMeter li > div {
-    padding: 5px; }
+  display: flex; }
+  .component__SaltyMeter li .name {
+    margin: 0 10px 10px 0; }
 
-.component__SaltyMeter .name {
-  width: 70%; }
-
-.component__SaltyMeter .score {
-  width: 30%;
-  font-weight: 700; }
+.component__SaltyMeter .salt {
+  font-weight: 700;
+  color: #40bf80; }
 
 /*# sourceMappingURL=styles.css.map*/

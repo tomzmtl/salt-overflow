@@ -2,29 +2,19 @@
   ul {
     margin: 0;
     padding: 0;
-    max-width: 300px;
-    list-style-type: none;;
+    list-style-type: none;
   }
 
   li {
     display: flex;
-    background: #F7F7F7;
 
-    &:nth-child(even) {
-      background: #FCFCFC;
+    .name {
+      margin: 0 10px 10px 0;
     }
-
-    > div {
-     padding: 5px;
-   }
   }
 
-  .name {
-    width: 70%;
-  }
-
-  .score {
-    width: 30%;
+  .salt {
     font-weight: 700;
+    color: $theme_primary;
   }
 }

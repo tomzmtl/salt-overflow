@@ -91,7 +91,7 @@
 	
 	var _View2 = _interopRequireDefault(_View);
 	
-	__webpack_require__(287);
+	__webpack_require__(276);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -30502,6 +30502,10 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
+	var _Footer = __webpack_require__(277);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = function (_ref) {
@@ -30514,7 +30518,8 @@
 	      'div',
 	      { className: 'app-content' },
 	      content || _react2.default.createElement(_Dashboard2.default, null)
-	    )
+	    ),
+	    _react2.default.createElement(_Footer2.default, null)
 	  );
 	};
 
@@ -30576,7 +30581,7 @@
 	  var games = _ref.games;
 	  return _react2.default.createElement(
 	    'div',
-	    null,
+	    { className: 'block-wrapper' },
 	    _react2.default.createElement(_SaltyMeter2.default, { players: players }),
 	    _react2.default.createElement(_LatestResults2.default, { games: games })
 	  );
@@ -30609,7 +30614,7 @@
 	    ),
 	    _react2.default.createElement(
 	      "div",
-	      { className: "score" },
+	      { className: "salt" },
 	      player.salt
 	    )
 	  );
@@ -30762,7 +30767,7 @@
 	
 	  return _react2.default.createElement(
 	    'li',
-	    null,
+	    { className: 'game' },
 	    p
 	  );
 	};
@@ -30857,21 +30862,38 @@
 	};
 
 /***/ },
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */
+/* 276 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function () {
+	  return _react2.default.createElement(
+	    "footer",
+	    { className: "main-footer" },
+	    _react2.default.createElement(
+	      "a",
+	      { href: "https://github.com/tomzmtl/SaltOverflow" },
+	      "0.6.0"
+	    )
+	  );
+	};
 
 /***/ }
 /******/ ]);

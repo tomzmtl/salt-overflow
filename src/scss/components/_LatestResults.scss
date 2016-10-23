@@ -5,93 +5,52 @@
     padding: 0;
     list-style-type: none;
     flex-wrap: wrap;
-    max-width: 650px;
   }
 
-  li {
+  .game {
+    width: 50%;
     display: flex;
-    flex-direction: row;
-    background: #FCFCFC;
+    flex-direction: column;
+    margin-bottom: 30px;
+    background: rgba(0,0,0,0.1);
     text-align: center;
+  }
 
-    > div {
-      padding: 5px;
-    }
+    //> div {}
 
-    .player {
-      width: 50%;
-    }
+  .player {
+    display: flex;
+    line-height: 1;
 
     .name {
-      font-size: 0.8em;
+      margin-right: 10px;
+      //&.p1 {}
+      //&.p2 {}
+    }
 
-      &.p1 {
-        padding-right: 10px;
-        text-align: right;
-      }
-
-      &.p2 {
-        padding-left: 10px;
-      }
+    .icon {
+      display: none;
     }
 
     &:nth-child(odd) {
-      background: #F7F7F7;
+      background: rgba(0,0,0,0.2);
     }
 
-    .player.winner {
-      .name {
+    &.winner {
+      order: 1;
+      margin-bottom: 5px;
+
+      .score {
         font-weight: 700;
         color: $theme_primary;
       }
     }
 
-    .player.loser {
-      .component__CharacterIcon {
-        opacity: 0.5;
-      }
-    }
-  }
-}
+    &.loser {
+      order: 2;
+      opacity: 0.7;
 
-
-$break_three: 580px;
-$break_four: 780px;
-
-.component__LatestResults {
-  @media (max-width: $break_three - 1) {
-    li {
-      width: 47.5%;
-      margin-right: 5%;
-      margin-bottom: 5%;
-
-      &:nth-child(2n+2) {
-        margin-right: 0;
-      }
-    }
-  }
-
-  @media (min-width: $break_three) and (max-width: $break_four - 1) {
-    li {
-      width: 32%;
-      margin-right: 2%;
-      margin-bottom: 4%;
-
-      &:nth-child(3n+3) {
-        margin-right: 0;
-      }
-    }
-  }
-
-  @media (min-width: $break_four) {
-    li {
-      width: 22%;
-      margin-right: 4%;
-      margin-bottom: 4%;
-
-      &:nth-child(4n+4) {
-        margin-right: 0;
-      }
+      //.component__CharacterIcon {}
     }
   }
 }
