@@ -1,4 +1,8 @@
 .component__LatestResults {
+  .content {
+    font-size: 7vw;
+  }
+
   ul {
     display: flex;
     margin: 0;
@@ -51,6 +55,15 @@
       opacity: 0.7;
 
       //.component__CharacterIcon {}
+    }
+  }
+}
+
+
+@media (min-width: 500px) {
+  .component__LatestResults {
+    .content {
+      font-size: 35px;
     }
   }
 }

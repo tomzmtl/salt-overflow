@@ -1,4 +1,8 @@
 .component__SaltyMeter {
+  .content {
+    font-size: 10vw;
+  }
+
   ul {
     margin: 0;
     padding: 0;
@@ -9,12 +13,47 @@
     display: flex;
 
     .name {
-      margin: 0 10px 10px 0;
+      margin-right: 4%;
     }
   }
 
   .salt {
     font-weight: 700;
     color: $theme_primary;
+  }
+}
+
+
+@media (min-width: 500px) {
+  .component__SaltyMeter {
+    .content {
+      font-size: 50px;
+    }
+  }
+}
+
+
+@media (min-width: 650px) {
+  .component__SaltyMeter {
+    ul {
+      display: flex;
+    }
+
+    li {
+      display: block;
+      flex-grow: 1;
+      text-align: center;
+
+      .name {
+        margin: 0;
+        line-height: 1;
+        font-size: 3vw;
+      }
+
+      .salt {
+        font-size: 5vw;
+        font-weight: 400;
+      }
+    }
   }
 }

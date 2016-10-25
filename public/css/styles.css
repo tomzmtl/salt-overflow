@@ -381,7 +381,7 @@ body {
   justify-content: space-between;
   padding: 20px 20px 14px 20px;
   border-bottom: 3px solid #40bf80;
-  background: rgba(0, 0, 0, 0.9); }
+  background: linear-gradient(to bottom, black 0%, rgba(0, 0, 0, 0.6) 100%); }
   .main-header a {
     text-decoration: none;
     cursor: pointer; }
@@ -402,12 +402,13 @@ body {
   margin-bottom: 3%;
   border-radius: 3px; }
   .block > header {
-    padding: 20px;
+    padding: 20px 20px 15px 20px;
     background: #0d261a; }
     .block > header h1 {
       margin: 0;
       font-size: 1.1em;
-      font-weight: 400; }
+      font-weight: 400;
+      color: #EEE; }
   .block > .content {
     padding: 20px; }
   .block:first-child {
@@ -423,9 +424,9 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 20px;
-  border-top: 3px solid #40bf80; }
+  border-top: 3px solid #0d261a; }
   .main-footer a {
-    color: #999;
+    color: #555;
     text-decoration: none; }
 
 input,
@@ -488,6 +489,9 @@ select, .component__NumberSelector {
     top: 4px;
     right: 4px; }
 
+.component__LatestResults .content {
+  font-size: 7vw; }
+
 .component__LatestResults ul {
   display: flex;
   margin: 0;
@@ -522,6 +526,10 @@ select, .component__NumberSelector {
     order: 2;
     opacity: 0.7; }
 
+@media (min-width: 500px) {
+  .component__LatestResults .content {
+    font-size: 35px; } }
+
 .component__NumberSelector {
   display: flex;
   padding: 6px; }
@@ -543,6 +551,9 @@ select, .component__NumberSelector {
     .component__NumberSelector div:last-child {
       margin-right: 0; }
 
+.component__SaltyMeter .content {
+  font-size: 10vw; }
+
 .component__SaltyMeter ul {
   margin: 0;
   padding: 0;
@@ -551,10 +562,29 @@ select, .component__NumberSelector {
 .component__SaltyMeter li {
   display: flex; }
   .component__SaltyMeter li .name {
-    margin: 0 10px 10px 0; }
+    margin-right: 4%; }
 
 .component__SaltyMeter .salt {
   font-weight: 700;
   color: #40bf80; }
+
+@media (min-width: 500px) {
+  .component__SaltyMeter .content {
+    font-size: 50px; } }
+
+@media (min-width: 650px) {
+  .component__SaltyMeter ul {
+    display: flex; }
+  .component__SaltyMeter li {
+    display: block;
+    flex-grow: 1;
+    text-align: center; }
+    .component__SaltyMeter li .name {
+      margin: 0;
+      line-height: 1;
+      font-size: 3vw; }
+    .component__SaltyMeter li .salt {
+      font-size: 5vw;
+      font-weight: 400; } }
 
 /*# sourceMappingURL=styles.css.map*/
