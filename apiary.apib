@@ -66,18 +66,21 @@ SaltOverflow backend API.
 
 + Request (application/json)
 
-        [
-            {
-                "player": "b46ecaa51454908",
-                "character": 34,
-                "score": 2,
-            },
-            {
-                "player": "b46ecaa51454909",
-                "character": 11,
-                "score": 1,
-            }
-        ]
+        {
+            "data": [
+                {
+                    "player": "b46ecaa51454908",
+                    "character": 34,
+                    "score": 2,
+                },
+                {
+                    "player": "b46ecaa51454909",
+                    "character": 11,
+                    "score": 1,
+                }
+            ],
+            "source": "webapp",
+        }
         
 + Response 201 (application/json)
 
